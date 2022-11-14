@@ -10,7 +10,8 @@
     "build": "rimraf ./build && tsc && ef-tspm",
     "postinstall": "rimraf ./build && tsc && ef-tspm",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "lint:format": "prettier --write \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {
     "@types/csurf": "^1.11.2",

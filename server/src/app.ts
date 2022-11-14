@@ -23,6 +23,7 @@ class Express {
   public port: string | number;
   constructor() {
     this.app = express();
+
     this.server = new Server(this.app);
     this.env = configs.NODE_ENV || "development";
     this.port = configs.PORT || 9005;
