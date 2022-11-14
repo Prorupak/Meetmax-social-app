@@ -5,7 +5,7 @@ import { ErrorMiddleware } from "@/middlewares";
 import { IUser } from "@/models/users.models";
 import { User, Follow } from "@/models";
 import { makeResponseJson } from "@/utils/util";
-// import { uploadImageToStorage } from "@/storage/cloudinary";
+import { uploadImageToStorage } from "@/storage/cloudinary";
 
 const { ErrorHandler } = ErrorMiddleware;
 
@@ -122,26 +122,26 @@ export const editUser = async (req: Request, res: Response, next: NextFunction) 
   }
 };
 
-// export const uploadPhoto = async (req: Request, res: Response, next: NextFunction) => {
-//   try {
-//     const { field } = req.params;
-//     const file = req.file;
+export const uploadPhoto = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { field } = req.params;
+    const file = req.file;
 
-//     if (!file) return next(new ErrorHandler(400, "File not provided."));
-//     if (!["picture", "cover"].includes(field)) return next(new ErrorHandler(400, `Unexpected field ${field}`));
+    if (!file) return next(new ErrorHandler(400, "File not provided."));
+    if (!["picture", "cover"].includes(field)) return next(new ErrorHandler(400, `Unexpected field ${field}`));
 
-//     const image = await uploadImageToStorage(file, `${req.user.username}/profile`);
-//     const fieldToUpdate = field === "picture" ? "profilePicture" : "coverPhoto";
+    const image = await uploadImageToStorage(file, `${req.user.username}/profile`);
+    const fieldToUpdate = field === "picture" ? "profilePicture" : "coverPhoto";
 
-//     await User.findByIdAndUpdate((req.user as IUser)._id, {
-//       $set: {
-//         [fieldToUpdate]: image,
-//       },
-//     });
+    await User.findByIdAndUpdate((req.user as IUser)._id, {
+      $set: {
+        [fieldToUpdate]: image,
+      },
+    });
 
-//     res.status(200).send(makeResponseJson({ image }));
-//   } catch (e) {
-//     console.log("CANT UPLOAD FILE: ", e);
-//     next(e);
-//   }
-// };
+    res.status(200).send(makeResponseJson({ image }));
+  } catch (e) {
+    console.log("CANT UPLOAD FILE: ", e);
+    next(e);
+  }
+};
