@@ -51,6 +51,10 @@ const configs = {
     api_key: process.env.api_key,
     api_secret: process.env.api_secret,
   },
+  google: {
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  },
 };
 
 export default configs;

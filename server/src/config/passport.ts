@@ -1,3 +1,4 @@
+import GoogleStrategy from "passport-google-oauth2";
 import LocalStrategy from "passport-local";
 
 import User, { IUser } from "@/models/users.models";
@@ -77,6 +78,57 @@ export default function (passport) {
             });
           }
         } catch (err) {
+          return done(err);
+        }
+      },
+    ),
+  );
+
+  passport.use(
+    "google-auth",
+    new GoogleStrategy.Strategy(
+      {
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: `/api/v1/auth/google/callback`,
+      },
+      async (accessToken, refreshToken, profile, done) => {
+        try {
+          console.log(profile);
+          const user = await User.findOne({ provider_id: profile.id });
+
+          console.log(profile);
+
+          if (user) {
+            return done(null, user);
+          } else {
+            const randomString = Math.random().toString(36).substring(2);
+            const randomNumber = Math.floor(Math.random() * 100);
+
+            const newUser = new User({
+              username: `${profile.given_name}_${profile.family_name}${randomNumber}`,
+              email: profile.email,
+              password: randomString,
+              firstName: profile.given_name,
+              lastName: profile.family_name,
+              profilePicture: profile.picture,
+              provider_id: profile.id,
+              provider: "google",
+              provider_access_token: accessToken,
+              provider_refresh_token: refreshToken,
+            });
+
+            newUser.save(function (err) {
+              if (err) {
+                done(null, false, err);
+              } else {
+                console.log("SUCCESSFULL CREATED", newUser);
+                done(null, newUser);
+              }
+            });
+          }
+        } catch (err) {
+          console.log(err);
           return done(err);
         }
       },
