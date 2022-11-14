@@ -16,6 +16,7 @@ import session, { SessionOptions } from "express-session";
 import passport from "passport";
 import initPassport from "@/config/passport";
 import { logger, stream } from "@utils/logger";
+import initSocket from "@/config/socket";
 
 const { errorMiddleware } = ErrorMiddleware;
 
@@ -35,6 +36,7 @@ class Express {
     this.connectDb();
     this.initMiddlewares();
     initPassport(passport);
+    initSocket(this.app, this.server);
   }
   private initMiddlewares(): void {
     this.app.disable("x-powered-by");
