@@ -17,12 +17,7 @@ router.route("/:username/post").get(isAuthenticated, postControllers.getPostByUs
 router
   .route("/post/:post_id")
   .get(isAuthenticated, validateObjectID("post_id"), postControllers.getPostByPostID)
-  .put(
-    isAuthenticated,
-    validateObjectID("post_id"),
-    // validateBody(schemas.createPostSchema),
-    postControllers.updatePost,
-  )
+  .put(isAuthenticated, validateObjectID("post_id"), validateBody(schemas.createPostSchema), postControllers.updatePost)
   .delete(isAuthenticated, validateObjectID("post_id"), postControllers.deletePost);
 
 router
