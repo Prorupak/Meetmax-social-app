@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import { connect } from "mongoose";
 import cors from "cors";
 import csurf from "csurf";
+import morgan from "morgan";
 import colors from "colors";
 import createError from "http-errors";
 import compression from "compression";
@@ -12,8 +13,9 @@ import { dbConnection } from "@databases";
 import configs from "./config";
 import api from "@/routes/api";
 import session, { SessionOptions } from "express-session";
-import passport, { authenticate } from "passport";
+import passport from "passport";
 import initPassport from "@/config/passport";
+import { logger, stream } from "@utils/logger";
 
 const { errorMiddleware } = ErrorMiddleware;
 
@@ -42,7 +44,7 @@ class Express {
     this.app.use(cookieParser());
     this.app.set("trust proxy", 1);
     this.app.use(compression());
-
+    this.app.use(morgan(configs.LOG_FORMAT, { stream }));
     this.app.use(session(configs.session as SessionOptions));
     this.app.use(passport.initialize());
     this.app.use(passport.session());
@@ -61,20 +63,20 @@ class Express {
   public connectDb(): void {
     connect(dbConnection.url, dbConnection.options)
       .then(() => {
-        console.log(`🚀 Connected to database`.green);
+        logger.info(`🚀 Connected to database`.green);
       })
       .catch(err => {
-        console.log(`❌ Failed to connect to database`.red);
-        console.log(err);
+        logger.error(`❌ Failed to connect to database`.red);
+        logger.error(err);
       });
   }
 
   public listen(): void {
     this.server.listen(this.port, () => {
-      console.log(`=================================`.blue.bold);
-      console.log(`=======`.yellow + ` ENV: ${this.env} `.random + `=======`.yellow);
-      console.log(`🚀 App listening on the port`.green + ` ${this.port}`.red);
-      console.log(`=================================`.blue);
+      logger.info(`=================================`.blue.bold);
+      logger.info(`=======`.yellow + ` ENV: ${this.env} `.random + `=======`.yellow);
+      logger.info(`🚀 App listening on the port`.green + ` ${this.port}`.red);
+      logger.info(`=================================`.blue);
     });
   }
 }
