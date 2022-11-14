@@ -6,6 +6,9 @@
   "scripts": {
     "start-client": "cd frontend && npm run dev",
     "start-server": "cd server && npm run start",
+    "lint-client": "cd frontend && npm run lint:fix",
+    "lint-server": "cd server && npm run lint:fix",
+    "lint": "concurrently \"npm run lint-client\" \"npm run lint-server\"",
     "start": "concurrently \"yarn start-server\" \"yarn start-client\"",
     "init-project": "concurrently \"cd frontend && npm install\" \"cd server && npm install\""
   },
