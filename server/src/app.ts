@@ -6,11 +6,14 @@ import cors from "cors";
 import csurf from "csurf";
 import colors from "colors";
 import createError from "http-errors";
-import morgan from "morgan";
 import compression from "compression";
 import { ErrorMiddleware } from "@middlewares/index";
 import { dbConnection } from "@databases";
 import configs from "./config";
+import api from "@/routes/api";
+import session, { SessionOptions } from "express-session";
+import passport from "passport";
+import initPassport from "@/config/passport";
 
 const { errorMiddleware } = ErrorMiddleware;
 
@@ -23,11 +26,13 @@ class Express {
   public port: string | number;
   constructor() {
     this.app = express();
+
     this.server = new Server(this.app);
     this.env = configs.NODE_ENV || "development";
     this.port = configs.PORT || 9005;
     this.connectDb();
     this.initMiddlewares();
+    initPassport(passport);
   }
   private initMiddlewares(): void {
     this.app.disable("x-powered-by");
@@ -37,6 +42,12 @@ class Express {
     this.app.use(cookieParser());
     this.app.set("trust proxy", 1);
     this.app.use(compression());
+
+    this.app.use(session(configs.session as SessionOptions));
+    this.app.use(passport.initialize());
+    this.app.use(passport.session());
+
+    this.app.use("/api", api);
 
     // catch 404 and forward to error handler
     this.app.use((req, res, next) => {
