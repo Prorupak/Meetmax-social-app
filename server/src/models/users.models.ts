@@ -1,6 +1,7 @@
-import { Document, Schema, model } from "mongoose";
+import { Document, Schema, model, isValidObjectId } from "mongoose";
 import bcrypt from "bcryptjs";
 import omit from "lodash.omit";
+import { IPost } from "./post.models";
 
 enum EProvider {
   facebook = "facebook",
@@ -31,6 +32,7 @@ export interface IUser extends Document {
     birthday: string;
     gender?: EGender;
   };
+  bookmarks?: Array<IPost["_id"]>;
   profilePicture?: string;
   coverPicture?: string;
   fullName?: string;
@@ -39,6 +41,7 @@ export interface IUser extends Document {
   toUserJSON(): IUser;
   toProfileJSON(): IUser;
   passwordMatch(password: string): Promise<boolean>;
+  isBookmarked(id: string): boolean;
 }
 
 const userSchema: Schema = new Schema(
@@ -131,6 +134,13 @@ const userSchema: Schema = new Schema(
       default: {},
     },
 
+    bookmarks: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
+
     dateJoined: {
       type: Date,
       default: Date.now(),
@@ -186,6 +196,15 @@ userSchema.methods.toProfileJSON = function (this: IUser) {
     firstName: this.firstName,
     profilePicture: this.profilePicture,
   };
+};
+
+userSchema.methods.isBookmarked = function (this: IUser, postID) {
+  console.log(postID);
+  if (!isValidObjectId(postID)) return false;
+
+  return this.bookmarks.some(bookmark => {
+    return bookmark._id.toString() === postID.toString();
+  });
 };
 
 userSchema.pre("save", async function (this: IUser, next) {
