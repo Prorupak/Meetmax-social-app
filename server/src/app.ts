@@ -12,7 +12,7 @@ import { dbConnection } from "@databases";
 import configs from "./config";
 import api from "@/routes/api";
 import session, { SessionOptions } from "express-session";
-import passport from "passport";
+import passport, { authenticate } from "passport";
 import initPassport from "@/config/passport";
 
 const { errorMiddleware } = ErrorMiddleware;
