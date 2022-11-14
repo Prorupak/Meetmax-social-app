@@ -4,6 +4,7 @@ import userRoutes from "./user.routes";
 import followRoutes from "./follow.routes";
 import postRoutes from "./post.routes";
 import newsFeedRoutes from "./newsfeed.routes";
+import notificationRoutes from "./notification.routes";
 
 const app = express();
 
@@ -12,5 +13,6 @@ app.use("/v1", userRoutes);
 app.use("/v1", followRoutes);
 app.use("/v1", postRoutes);
 app.use("/v1", newsFeedRoutes);
+app.use("/v1", notificationRoutes);
 
 export default app;
