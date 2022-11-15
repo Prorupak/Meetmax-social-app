@@ -17,6 +17,7 @@ import passport from "passport";
 import initPassport from "@/config/passport";
 import { logger, stream } from "@utils/logger";
 import initSocket from "@/config/socket";
+import sendGridMail from "@sendgrid/mail";
 
 const { errorMiddleware } = ErrorMiddleware;
 
@@ -37,6 +38,7 @@ class Express {
     this.initMiddlewares();
     initPassport(passport);
     initSocket(this.app, this.server);
+    sendGridMail.setApiKey(configs.sendGridApiKey);
   }
   private initMiddlewares(): void {
     this.app.disable("x-powered-by");
