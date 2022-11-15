@@ -212,7 +212,7 @@ userSchema.methods.isBookmarked = function (this: IUser, postID) {
   });
 };
 
-userSchema.methods.generateVerificationToken = function () {
+userSchema.methods.generateVerificationKey = function () {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
   const user = this;
 

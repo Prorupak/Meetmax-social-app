@@ -7,6 +7,7 @@ import newsFeedRoutes from "./newsfeed.routes";
 import notificationRoutes from "./notification.routes";
 import commentRoutes from "./comment.routes";
 import bookmarkRoutes from "./bookmark.routes";
+import messageRoutes from "./message.routes";
 
 const app = express();
 
@@ -18,5 +19,6 @@ app.use("/v1", newsFeedRoutes);
 app.use("/v1", notificationRoutes);
 app.use("/v1", commentRoutes);
 app.use("/v1", bookmarkRoutes);
+app.use("/v1", messageRoutes);
 
 export default app;
