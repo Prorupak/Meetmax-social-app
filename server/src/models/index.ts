@@ -6,3 +6,5 @@ export { default as Post } from "./post.models";
 export { default as NewsFeed } from "./newsfeed.models";
 export { default as Bookmark } from "./bookmark.models";
 export { default as Like } from "./like.models";
+export { default as Message } from "./message.models";
+export { default as Chat } from "./chat.models";
