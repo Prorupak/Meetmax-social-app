@@ -13,6 +13,7 @@ const configs = {
   NODE_ENV: process.env.NODE_ENV,
   LOG_FORMAT: process.env.LOG_FORMAT,
   LOG_DIR: process.env.LOG_DIR,
+  sendGridApiKey: process.env.SENDGRID_API_KEY,
   mongoose: {
     url: process.env.MongoDB_URL,
     options: {
