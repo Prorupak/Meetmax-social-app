@@ -1,9 +1,18 @@
 import { Router } from "express";
-import { login, register, checkSession, logOut } from "@/controllers/auth.controllers";
 import { Middlewares } from "@/middlewares";
 import { schemas, validateBody } from "@/validations/validations";
 import passport from "passport";
 import configs from "@/config";
+import {
+  login,
+  register,
+  checkSession,
+  logOut,
+  accountVerify,
+  accountVerifyToken,
+  passwordReset,
+  recoverAccount,
+} from "@/controllers/auth.controllers";
 
 const { isAuthenticated } = Middlewares;
 
@@ -11,17 +20,22 @@ const router = Router({ mergeParams: true });
 
 router.route("/register").post(register, validateBody(schemas.registerSchema));
 
-router.post("/login", login, validateBody(schemas.loginSchema));
+router.post("/login", validateBody(schemas.loginSchema), login);
 
 router.get("/check-session", checkSession);
 
-//@route DELETE /api/v1/logout
 router.delete("/logout", isAuthenticated, logOut);
 
-//@route GET /api/v1/auth/github GITHUB AUTH
+router.post("/account/verify", isAuthenticated, accountVerify);
+
+router.get("/account/verify/:token", accountVerifyToken);
+
+router.post("/account/recover", recoverAccount);
+
+router.patch("/account/password/reset", passwordReset);
+
 router.get("/google", passport.authenticate("google-auth", { scope: ["email", "profile"] }));
 
-//@route GET /api/v1/auth/github/callback GITHUB AUTH
 router.get(
   "/google/callback",
   passport.authenticate("google-auth", {
