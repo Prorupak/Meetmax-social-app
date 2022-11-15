@@ -1,6 +1,8 @@
-import { Document, Schema, model } from "mongoose";
+import jwt from "jsonwebtoken";
+import { Document, Schema, model, isValidObjectId, Model } from "mongoose";
 import bcrypt from "bcryptjs";
 import omit from "lodash.omit";
+import { IPost } from "./post.models";
 
 enum EProvider {
   facebook = "facebook",
@@ -16,7 +18,6 @@ export enum EGender {
 
 export interface IUser extends Document {
   email?: string;
-  _id?: string;
   username?: string;
   password?: string;
   provider?: EProvider;
@@ -31,6 +32,7 @@ export interface IUser extends Document {
     birthday: string;
     gender?: EGender;
   };
+  bookmarks?: Array<IPost["_id"]>;
   profilePicture?: string;
   coverPicture?: string;
   fullName?: string;
@@ -39,6 +41,12 @@ export interface IUser extends Document {
   toUserJSON(): IUser;
   toProfileJSON(): IUser;
   passwordMatch(password: string): Promise<boolean>;
+  isBookmarked(id: string): boolean;
+  generateVerificationKey(): string;
+}
+
+interface IUserModel extends Model<IUser> {
+  hashPassword(pw: string): string;
 }
 
 const userSchema: Schema = new Schema(
@@ -131,6 +139,13 @@ const userSchema: Schema = new Schema(
       default: {},
     },
 
+    bookmarks: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
+
     dateJoined: {
       type: Date,
       default: Date.now(),
@@ -188,6 +203,34 @@ userSchema.methods.toProfileJSON = function (this: IUser) {
   };
 };
 
+userSchema.methods.isBookmarked = function (this: IUser, postID) {
+  console.log(postID);
+  if (!isValidObjectId(postID)) return false;
+
+  return this.bookmarks.some(bookmark => {
+    return bookmark._id.toString() === postID.toString();
+  });
+};
+
+userSchema.methods.generateVerificationToken = function () {
+  // eslint-disable-next-line @typescript-eslint/no-this-alias
+  const user = this;
+
+  const verificationToken = jwt.sign(
+    { user_id: user._id },
+    process.env.USER_VERIFICATION_TOKEN_SECRET,
+    { expiresIn: 300000 }, // 5 minutes
+  );
+  return verificationToken;
+};
+
+userSchema.statics.hashPassword = function (pw: string) {
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(pw, salt);
+
+  return hash;
+};
+
 userSchema.pre("save", async function (this: IUser, next) {
   if (this.info.gender === null) this.info.gender = EGender.other;
   if (this.firstName === null) this.firstName = "";
@@ -211,6 +254,6 @@ userSchema.pre("save", async function (this: IUser, next) {
   }
 });
 
-const userModel = model<IUser>("User", userSchema);
+const userModel = model<IUser, IUserModel>("User", userSchema);
 
 export default userModel;
