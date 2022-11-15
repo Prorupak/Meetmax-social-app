@@ -1,4 +1,5 @@
-import { Document, Schema, model, isValidObjectId } from "mongoose";
+import jwt from "jsonwebtoken";
+import { Document, Schema, model, isValidObjectId, Model } from "mongoose";
 import bcrypt from "bcryptjs";
 import omit from "lodash.omit";
 import { IPost } from "./post.models";
@@ -17,7 +18,6 @@ export enum EGender {
 
 export interface IUser extends Document {
   email?: string;
-  _id?: string;
   username?: string;
   password?: string;
   provider?: EProvider;
@@ -42,6 +42,11 @@ export interface IUser extends Document {
   toProfileJSON(): IUser;
   passwordMatch(password: string): Promise<boolean>;
   isBookmarked(id: string): boolean;
+  generateVerificationKey(): string;
+}
+
+interface IUserModel extends Model<IUser> {
+  hashPassword(pw: string): string;
 }
 
 const userSchema: Schema = new Schema(
@@ -207,6 +212,25 @@ userSchema.methods.isBookmarked = function (this: IUser, postID) {
   });
 };
 
+userSchema.methods.generateVerificationToken = function () {
+  // eslint-disable-next-line @typescript-eslint/no-this-alias
+  const user = this;
+
+  const verificationToken = jwt.sign(
+    { user_id: user._id },
+    process.env.USER_VERIFICATION_TOKEN_SECRET,
+    { expiresIn: 300000 }, // 5 minutes
+  );
+  return verificationToken;
+};
+
+userSchema.statics.hashPassword = function (pw: string) {
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(pw, salt);
+
+  return hash;
+};
+
 userSchema.pre("save", async function (this: IUser, next) {
   if (this.info.gender === null) this.info.gender = EGender.other;
   if (this.firstName === null) this.firstName = "";
@@ -230,6 +254,6 @@ userSchema.pre("save", async function (this: IUser, next) {
   }
 });
 
-const userModel = model<IUser>("User", userSchema);
+const userModel = model<IUser, IUserModel>("User", userSchema);
 
 export default userModel;
