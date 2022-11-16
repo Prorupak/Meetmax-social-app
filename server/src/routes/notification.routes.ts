@@ -11,8 +11,8 @@ router.get("/notifications", isAuthenticated, getNotifications);
 
 router.get("/notifications/unread", isAuthenticated, getUnreadNotifications);
 
-router.put("/notifications/mark-all-read", isAuthenticated, markNotificationsAsRead);
+router.patch("/notifications/mark-all-read", isAuthenticated, markNotificationsAsRead);
 
-router.put("/notifications/:id/read", isAuthenticated, validateObjectID("id"), readNotification);
+router.patch("/notifications/:id/read", isAuthenticated, validateObjectID("id"), readNotification);
 
 export default router;
