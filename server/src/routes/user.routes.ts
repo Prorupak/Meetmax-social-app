@@ -12,7 +12,7 @@ const { isAuthenticated } = Middlewares;
 
 router.route("/user/:username").get(isAuthenticated, getUserByUsername);
 
-router.route("/user/:username/edit").put(isAuthenticated, editUser);
+router.route("/user/:username/edit").patch(isAuthenticated, editUser);
 
 router.route("/user/upload/:field").post(isAuthenticated, multer.single("photo"), uploadPhoto);
 

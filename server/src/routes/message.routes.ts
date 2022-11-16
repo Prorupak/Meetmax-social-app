@@ -13,7 +13,7 @@ router.get("/messages", isAuthenticated, messageControllers.getMessages);
 router.get("/messages/unread", isAuthenticated, messageControllers.getUnreadMessages);
 
 router.patch(
-  "/messages/read/:from_id",
+  "/message/read/:from_id",
   isAuthenticated,
   validateObjectID("from_id"),
   messageControllers.readMessageByID,

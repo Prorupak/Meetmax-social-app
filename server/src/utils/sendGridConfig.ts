@@ -223,7 +223,7 @@ export const sendVerificationMail = (params: IMailParams) => {
         await sendGridMail.send({
           to: params.email,
           from: {
-            email: "rupaksapkota2000@gmail.com",
+            email: "contact@im-rupak.tech",
             name: "Meetmax",
           }, // Use the email address or domain you verified above
           subject: "Meetmax - Verify your email address",
@@ -336,7 +336,7 @@ export const sendPasswordResetInstructionMail = (params: IMailParamsReset) => {
         await sendGridMail.send({
           to: params.email,
           from: {
-            email: "rupaksapkota2000@gmail.com",
+            email: "contact@im-rupak.tech",
             name: "Meetmax",
           }, // Use the email address or domain you verified above
           subject: "Meetmax - Reset your password",

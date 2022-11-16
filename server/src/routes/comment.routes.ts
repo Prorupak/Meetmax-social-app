@@ -19,7 +19,7 @@ router
 
 router
   .route("/comment/:comment_id")
-  .put(
+  .patch(
     isAuthenticated,
     validateObjectID("comment_id"),
     validateBody(schemas.commentSchema),
