@@ -3,6 +3,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 // import { persistReducer } from "redux-persist";
 import authReducers from "./auth/authSlice";
 import followersReducers from "./followers/followersSlice";
+import newsfeedReducers from "./newsfeed/newsfeedSlice";
 
 // const preferenceConfig = {
 //   key: "tracking",
@@ -19,6 +20,7 @@ import followersReducers from "./followers/followersSlice";
 const rootReducers = combineReducers({
   auth: authReducers,
   followers: followersReducers,
+  newsfeed: newsfeedReducers,
 });
 
 export default rootReducers;
