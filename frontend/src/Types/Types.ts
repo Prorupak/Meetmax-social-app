@@ -160,6 +160,12 @@ export interface INotification {
   link: string;
 }
 
+export interface INotificationsResponse {
+  notifications: INotification[];
+  count: number;
+  unreadCount: number;
+}
+
 export interface IMessage {
   id: string;
   from: IUser;
