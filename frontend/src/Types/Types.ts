@@ -171,6 +171,14 @@ export interface IMessage {
   isOwnMessage?: boolean;
 }
 
+export interface IFollowers {
+  isFollowing?: boolean;
+  id?: string;
+  username?: string;
+  email?: string;
+  profilePicture?: Record<string, unknown>;
+}
+
 export interface IBookmark {
   id: string;
   isBookmarked: boolean;
