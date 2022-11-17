@@ -64,7 +64,7 @@ export const getUserByUsername = async (req: Request, res: Response, next: NextF
           _id: 0,
           id: "$_id",
           info: 1,
-          isEmailValidated: 1,
+          isEmailVerified: 1,
           email: 1,
           profilePicture: 1,
           coverPhoto: 1,
