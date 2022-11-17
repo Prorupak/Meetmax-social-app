@@ -1,3 +1,4 @@
+import configs from "@/config";
 import sendGridMail from "@sendgrid/mail";
 
 interface IMailParams {
@@ -47,7 +48,7 @@ const renderEmailTemplate = (content: string) => {
         }
 
         body a {
-            color: #1188E6;
+            color: #30B9DC;
             text-decoration: none;
         }
 
@@ -143,7 +144,7 @@ const renderEmailTemplate = (content: string) => {
         <!--End Head user entered-->
     </head>
     <body>
-        <center class="wrapper" data-link-color="#1188E6" data-body-style="font-size:14px; font-family:inherit; color:#000000; background-color:#FFFFFF;">
+        <center class="wrapper" data-link-color="#30B9DC" data-body-style="font-size:14px; font-family:inherit; color:#000000; background-color:#FFFFFF;">
         <div class="webkit">
             <table cellpadding="0" cellspacing="0" border="0" width="100%" class="wrapper" bgcolor="#FFFFFF">
             <tbody>
@@ -168,12 +169,12 @@ const renderEmailTemplate = (content: string) => {
                                                 <tbody>
                                                     <tr>
                                                     <td style="font-size:6px; line-height:10px; padding:0px 0px 0px 0px;" valign="top" align="center">
-                                                        <img class="companyLogo" src="https://socialgen.vercel.app/assets/logo.png" alt="" style="width:80px; height: 80px;">
+                                                         <img class="companyLogo" src="https://socialgen.vercel.app/assets/logo.png" alt="" style="width:80px; height: 80px;">
                                                     </td>
                                                     </tr>
                                                     <tr>
                                                     <td valign="middle" style="text-align:center">
-                                                        <h3 class="companyName" style="margin: 0; padding:0; display:inline-block; font-size: 32px; color: #1a1a1a; font-family: inherit">Social Gen</h3>
+                                                        <h3 class="companyName" style="margin: 0; padding:0; display:inline-block; font-size: 32px; color: #1a1a1a; font-family: inherit">Meetmax</h3>
                                                     </td>
                                                     </tr>
                                                     <tr></tr>
@@ -182,10 +183,10 @@ const renderEmailTemplate = (content: string) => {
                                                 ${content}
                                             </table>
                                             <div data-role="module-unsubscribe" class="module" role="module" data-type="unsubscribe" style="color:#444444; font-size:12px; line-height:20px; padding:16px 16px 16px 16px; text-align:Center;">
-                                            <p class="footerText" style="font-size: 12px; color: #1a1a1a; font-family: Poppins, calibri,sans-serif,Helvetica; margin: 2px">Copyright &copy; ${new Date().getFullYear()} Social Gen. All rights reserved</p>
-                            <a class="footerText" style="font-size: 12px; font-family: Poppins, calibri,sans-serif,Helvetica;" href="https://juliusguevarra.com">https://juliusguevarra.com</a>
+                                            <p class="footerText" style="font-size: 12px; color: #1a1a1a; font-family: Poppins, calibri,sans-serif,Helvetica; margin: 2px">Copyright &copy; ${new Date().getFullYear()} Meetmax. All rights reserved</p>
+                            <a class="footerText" style="font-size: 12px; font-family: Poppins, calibri,sans-serif,Helvetica;" href="https://im-rupak.tech">https://im-rupak.tech</a>
                             <span class="footerText">|</span>
-                            <a class="footerText" style="font-size: 12px; font-family: Poppins, calibri,sans-serif,Helvetica;" href="https://facebook.com/julius.gudo14/">Facebook</a>
+                            <a class="footerText" style="font-size: 12px; font-family: Poppins, calibri,sans-serif,Helvetica;" href="https://facebook.com/">Facebook</a>
                                             </div>
                                         </td>
                                         </tr>
@@ -284,10 +285,10 @@ export const sendVerificationMail = (params: IMailParams) => {
                                                     <table border="0" cellpadding="0" cellspacing="0" class="wrapper-mobile" style="text-align:center;">
                                                     <tbody>
                                                         <tr>
-                                                        <td align="center" bgcolor="#4F46E5" class="inner-td" style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">
+                                                        <td align="center" bgcolor="#30B9DC" class="inner-td" style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">
                                                             <a href="${process.env.API_URL}/account/verify/${
             params.verificationKey
-          }" style="background-color:#4F46E5; border:1px solid #4F46E5; border-color:#4F46E5; border-radius:0px; border-width:1px; color:#fff; display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 40px 12px 40px; text-align:center; text-decoration:none; border-style:solid; font-family:inherit;" target="_blank">Verify Email Now</a>
+          }" style="background-color:#30B9DC; border:1px solid #30B9DC; border-color:#30B9DC; border-radius:0px; border-width:1px; color:#fff; display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 40px 12px 40px; text-align:center; text-decoration:none; border-style:solid; font-family:inherit;" target="_blank">Verify Email Now</a>
                                                         </td>
                                                         </tr>
                                                     </tbody>
@@ -386,7 +387,7 @@ export const sendPasswordResetInstructionMail = (params: IMailParamsReset) => {
                                                     <tbody>
                                                         <tr>
                                                         <td align="center" class="inner-td" style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">
-                                                            <a href="${process.env.CLIENT_URL}/password-reset?token=${
+                                                            <a href="${configs.client}/password-reset?token=${
             params.token
           }&user_id=${
             params.user_id
