@@ -9,6 +9,7 @@ import { sendPasswordResetInstructionMail, sendVerificationMail } from "@/utils/
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
 import { User } from "@/models";
+import configs from "@/config";
 
 const { ErrorHandler } = ErrorMiddleware;
 
@@ -87,6 +88,10 @@ export const accountVerify = async (req: Request, res: Response, next: NextFunct
   try {
     const user = await User.findOne({ username: req.user.username });
 
+    if (user?.isEmailVerified) {
+      return next(new ErrorHandler(409, "Account already verified."));
+    }
+
     if (user.email) {
       await sendVerificationMail({
         email: req.user.email,
@@ -131,10 +136,10 @@ export const accountVerifyToken = async (req: Request, res: Response, next: Next
 
       // TODO
       // Redirect once validated
-      res.redirect(`${process.env.CLIENT_URL}`);
+      res.redirect(`${configs.client}`);
 
       // return res.status(200).send({
-      //     verified: true
+      //   verified: true,
       // });
     });
   } catch (error: any) {
