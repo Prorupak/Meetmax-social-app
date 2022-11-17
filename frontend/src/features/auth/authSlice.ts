@@ -1,4 +1,4 @@
-import { IUser } from "@/types/Types";
+import { IUser } from "@/types/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type TAuthState = IUser | null;

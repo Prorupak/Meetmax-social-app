@@ -1,5 +1,5 @@
 import { apiSlice } from "@/app/api/apiSlice";
-import { ILoginResponse, IRegister, IRegisterResponse, ICheckSession } from "@/types/Types";
+import { ILoginResponse, IRegister, IRegisterResponse, ICheckSession } from "@/types/types";
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
