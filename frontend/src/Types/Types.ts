@@ -1,3 +1,33 @@
+export interface CustomError {
+  data: {
+    status_code: number;
+    error: {
+      message: string;
+      title: string;
+    };
+  };
+}
+
+export interface ILoginResponse {
+  auth: IAuth;
+  user: IUser;
+}
+
+export interface IRegisterResponse {
+  data: IUser;
+}
+
+export interface ICheckSession {
+  auth: IAuth;
+  user: IUser;
+}
+
+export interface IAuth {
+  id: string;
+  email: string;
+  username: string;
+}
+
 export interface ISettingsState {
   theme: "light" | "dark";
 }
@@ -130,6 +160,12 @@ export interface INotification {
   link: string;
 }
 
+export interface INotificationsResponse {
+  notifications: INotification[];
+  count: number;
+  unreadCount: number;
+}
+
 export interface IMessage {
   id: string;
   from: IUser;
@@ -139,6 +175,14 @@ export interface IMessage {
   seen: boolean;
   unseenCount?: number;
   isOwnMessage?: boolean;
+}
+
+export interface IFollowers {
+  isFollowing?: boolean;
+  id?: string;
+  username?: string;
+  email?: string;
+  profilePicture?: Record<string, unknown>;
 }
 
 export interface IBookmark {
