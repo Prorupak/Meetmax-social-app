@@ -1,6 +1,5 @@
 import { IFollowers } from "@/types/types";
 import { apiSlice } from "@/app/api/apiSlice";
-import { setFollowers } from "./followersSlice";
 
 const followersApiSlice = apiSlice.injectEndpoints({
   endpoints: (build) => ({
@@ -18,25 +17,7 @@ const followersApiSlice = apiSlice.injectEndpoints({
         method: "POST",
       }),
     }),
-    getUserFollowers: build.query<IFollowers[], string>({
-      query: (username) => `followers/${username}`,
-      transformResponse: (response: { data: IFollowers[] }) => response.data,
-      providesTags: ["Followers"],
-      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-          console.log("follow", data);
-          dispatch(setFollowers(data));
-        } catch (error) {
-          console.log(error);
-        }
-      },
-    }),
-    getUserFollowing: build.query<IFollowers[], string>({
-      query: (username) => `following/${username}`,
-      transformResponse: (response: { data: IFollowers[] }) => response.data,
-      providesTags: ["Followers"],
-    }),
+
     suggestedUsers: build.query<any[], void>({
       query: () => `users/suggested`,
       transformResponse: (response: { data: any[] }) => response.data,
@@ -45,10 +26,5 @@ const followersApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const {
-  useFollowUserMutation,
-  useUnfollowUserMutation,
-  useGetUserFollowersQuery,
-  useGetUserFollowingQuery,
-  useSuggestedUsersQuery,
-} = followersApiSlice;
+export const { useFollowUserMutation, useUnfollowUserMutation, useSuggestedUsersQuery } =
+  followersApiSlice;
