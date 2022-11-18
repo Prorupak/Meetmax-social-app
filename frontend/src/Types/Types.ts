@@ -160,6 +160,15 @@ export interface INotification {
   link: string;
 }
 
+export interface IAPIParams {
+  offset?: number;
+  limit?: number;
+  skip?: number;
+  q?: string;
+  type?: string;
+  sort?: "asc" | "desc";
+}
+
 export interface INotificationsResponse {
   notifications: INotification[];
   count: number;
