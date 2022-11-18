@@ -51,8 +51,43 @@ export const authApiSlice = apiSlice.injectEndpoints({
         return response;
       },
     }),
+    recoverAccount: builder.mutation<null, string>({
+      query: (body: string) => ({
+        url: "/auth/account/recover",
+        method: "POST",
+        body,
+      }),
+    }),
+    resetPassword: builder.mutation<null, { user_id: string; token: string; password: string }>({
+      query: (body) => ({
+        url: "/auth/account/reset-password",
+        method: "POST",
+        body,
+      }),
+    }),
+    accountVerification: builder.mutation<null, string>({
+      query: (body: string) => ({
+        url: "/auth/account/verify",
+        method: "POST",
+        body,
+      }),
+    }),
+    accountVerificationToken: builder.query<null, string>({
+      query: (token: string) => ({
+        url: `/auth/account/verify/${token}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useLogoutMutation, useCheckSessionMutation } =
-  authApiSlice;
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useLogoutMutation,
+  useCheckSessionMutation,
+  useAccountVerificationMutation,
+  useAccountVerificationTokenQuery,
+  useRecoverAccountMutation,
+  useResetPasswordMutation,
+} = authApiSlice;
