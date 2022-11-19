@@ -254,6 +254,7 @@ export interface IFileHandler<T> {
 
 export interface IPreferenceState {
   theme: "light" | "dark";
+  language: "en" | "np" | "fr";
   targetComment: IComment | null;
   targetPost: IPost | null;
   hasSentVerificationMail: boolean;
