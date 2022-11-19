@@ -18,11 +18,15 @@ module.exports = {
       desktop: "1280px",
     },
     fontFamily: {
-      montserrat: ["Montserrat", "sans-serif"],
-      hindMadurai: ["Hind Madurai", "sans-serif"],
-      signikaNegative: ["Signika Negative", "sans-serif"],
+      sans: ["SF Pro Display", "sans-serif"],
     },
     extend: {
+      padding: {
+        "6%": "6%",
+        "60px": "60px",
+        "20%": "20%",
+        "10%": "10%",
+      },
       colors: {
         primary: {
           100: "#75CCF3",
@@ -54,5 +58,11 @@ module.exports = {
       lineClamp: ["hover", "focus"],
     },
   },
-  plugins: [require("@tailwindcss/line-clamp")],
+  plugins: [
+    require("@tailwindcss/line-clamp"),
+    require("@tailwindcss/aspect-ratio"),
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/typography"),
+    require("@headlessui/tailwindcss"),
+  ],
 };
