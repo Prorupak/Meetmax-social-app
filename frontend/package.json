@@ -5,7 +5,7 @@
   "type": "module",
   "proxy": "http://localhost:9005",
   "scripts": {
-    "dev": "cross-env NODE_ENV=production vite",
+    "dev": "cross-env NODE_ENV=production vite --host",
     "build": "tsc && cross-env VITE_NODE_ENV=production vite build && cd dist && cp index.html 404.html",
     "serve": "vite preview",
     "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
@@ -50,6 +50,7 @@
     "socket.io": "^4.5.3",
     "socket.io-client": "^4.5.3",
     "styled-components": "^5.3.6",
+    "vite-plugin-svgr": "^2.2.2",
     "yup": "^0.32.11"
   },
   "devDependencies": {
@@ -64,6 +65,7 @@
     "@types/react-slick": "^0.23.10",
     "@types/react-transition-group": "^4.4.5",
     "@types/sass": "^1.43.1",
+    "@types/styled-components": "^5.1.26",
     "@types/tailwindcss": "^2.0.2",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.42.1",
@@ -105,3 +107,4 @@
     }
   }
 }
+
