@@ -6,6 +6,7 @@ import { persistor, store } from "@/app/store/store";
 import { PersistGate } from "redux-persist/integration/react";
 import "@/styles/app.css";
 import { BrowserRouter } from "react-router-dom";
+import "@/i18n/i18n";
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const container = document.getElementById("root")!;

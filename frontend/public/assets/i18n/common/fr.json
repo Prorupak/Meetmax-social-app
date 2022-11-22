@@ -1,0 +1,21 @@
+{
+  "username": "Nom d'utilisateur",
+  "email": "Email",
+  "oops": "Oups!",
+  "cancel": "Annuler",
+  "done": "Terminé",
+  "loading": "Chargement...",
+  "seemLost": "Tu semblais perdu.",
+  "notFoundPage": "La page que vous essayez de visiter n'existe pas.",
+  "uh-oh": "Oh oh!",
+  "language": "Langue",
+  "password": "Mot de passe",
+  "ok": "D'accord",
+  "search": "Chercher",
+  "searching": "Recherche en cours...",
+  "dark": "sombre",
+  "light": "clair",
+  "system": "système",
+  "default": "défaut",
+  "preloaderQuotes": "Concentrez-vous sur la façon d'être social, pas sur la façon de faire social."
+}

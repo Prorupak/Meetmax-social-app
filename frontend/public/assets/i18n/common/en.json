@@ -1,0 +1,15 @@
+{
+  "default": "default",
+  "username": "username",
+  "password": "password",
+  "oops": "Oops!",
+  "somethingWentWrong": "Something went wrong",
+  "seemLost": "you seemed lost.",
+  "language": "language",
+  "pageNotFound": "The page you're trying to visit doesn't exist.",
+  "dark": "dark",
+  "light": "light",
+  "system": "System",
+  "switchTheme": "Switch theme",
+  "preloaderQuotes": "Focus on how to be social, not on how to do social."
+}
