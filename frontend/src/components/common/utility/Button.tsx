@@ -5,9 +5,10 @@ interface IProps {
   type?: "button" | "submit" | "reset";
   widthFull?: boolean;
   children: React.ReactNode;
+  [props: string]: any;
 }
 
-const Button: React.FC<IProps> = ({ children, type, buttonType, size, widthFull }) => {
+const Button: React.FC<IProps> = ({ children, type, buttonType, size, widthFull, ...props }) => {
   const primary = buttonType === "primary" && "bg-blue-500 text-white hover:bg-blue-600";
   const secondary = buttonType === "secondary" && "bg-gray-500 hover:bg-gray-600 text-white";
   const ghost =
@@ -19,13 +20,14 @@ const Button: React.FC<IProps> = ({ children, type, buttonType, size, widthFull 
   const small = size === "small" && "px-2 py-1 text-xs";
   const medium = size === "medium" && "px-3 py-2 text-sm";
   const large = size === "large" && "px-4 py-3 text-base";
-  const defaultButton = "bg-blue-500 text-white px-3 py-2 text-sm";
+  // const defaultButton = "bg-blue-500 text-white px-3 py-2 text-sm";
   const buttonWidth = widthFull ? "w-full" : "";
 
   return (
     <button
       type={type}
-      className={`rounded-md ${defaultButton} ${primary} ${secondary} ${ghost} ${ghostWithBorder} ${small} ${medium} ${large} ${buttonWidth}`}>
+      className={`rounded-md  ${primary} ${secondary} ${ghost} ${ghostWithBorder} ${small} ${medium} ${large} ${buttonWidth}`}
+      {...props}>
       {children}
     </button>
   );
