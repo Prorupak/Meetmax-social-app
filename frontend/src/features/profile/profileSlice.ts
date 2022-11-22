@@ -60,7 +60,11 @@ const profileSlice = createSlice({
     },
     updateProfilePostLikes: (
       state,
-      action: PayloadAction<{ postID: string; state: boolean; likesCount: number }>,
+      action: PayloadAction<{
+        postID: string;
+        state: boolean;
+        likesCount: number;
+      }>,
     ) => {
       return {
         ...state,

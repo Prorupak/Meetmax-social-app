@@ -1,4 +1,9 @@
-import { FORGOT_PASSWORD, LOGIN, PASSWORD_RESET, REGISTER } from "@/constants/routes";
+import {
+  FORGOT_PASSWORD,
+  LOGIN,
+  PASSWORD_RESET,
+  REGISTER,
+} from "@/constants/routes";
 import React from "react";
 import { useLocation } from "react-router-dom";
 import LoginNavbar from "./LoginNavbar";

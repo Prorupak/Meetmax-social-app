@@ -8,9 +8,18 @@ interface IProps {
   [props: string]: any;
 }
 
-const Button: React.FC<IProps> = ({ children, type, buttonType, size, widthFull, ...props }) => {
-  const primary = buttonType === "primary" && "bg-blue-500 text-white hover:bg-blue-600";
-  const secondary = buttonType === "secondary" && "bg-gray-500 hover:bg-gray-600 text-white";
+const Button: React.FC<IProps> = ({
+  children,
+  type,
+  buttonType,
+  size,
+  widthFull,
+  ...props
+}) => {
+  const primary =
+    buttonType === "primary" && "bg-blue-500 text-white hover:bg-blue-600";
+  const secondary =
+    buttonType === "secondary" && "bg-gray-500 hover:bg-gray-600 text-white";
   const ghost =
     buttonType === "ghost" &&
     "bg-transparent hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white text-gray-900";

@@ -4,13 +4,28 @@ import { Link } from "react-router-dom";
 interface IProps {
   to: string;
   children: React.ReactNode;
-  fontWeight?: "normal" | "bold" | "extrabold" | "thin" | "light" | "medium" | "semibold" | any;
+  fontWeight?:
+    | "normal"
+    | "bold"
+    | "extrabold"
+    | "thin"
+    | "light"
+    | "medium"
+    | "semibold"
+    | any;
   fontSize?: "xs" | "sm" | "base" | "lg" | "xl" | any;
   color?: string;
   [props: string]: any;
 }
 
-const Links: React.FC<IProps> = ({ to, children, fontWeight, fontSize, color, ...props }) => {
+const Links: React.FC<IProps> = ({
+  to,
+  children,
+  fontWeight,
+  fontSize,
+  color,
+  ...props
+}) => {
   const weights = ["extrabold", "bold", "semibold", "medium", "light", "thin"];
   const weight = weights.includes(fontWeight) ? `font-${fontWeight}` : "normal";
 
@@ -18,7 +33,10 @@ const Links: React.FC<IProps> = ({ to, children, fontWeight, fontSize, color, ..
   const size = sizes.includes(fontSize) ? `text-${fontSize}` : "text-base";
 
   return (
-    <Link to={to} className={`${weight} ${size} ${color ? color : "text-blue-600"}`} {...props}>
+    <Link
+      to={to}
+      className={`${weight} ${size} ${color ? color : "text-blue-600"}`}
+      {...props}>
       {children}
     </Link>
   );

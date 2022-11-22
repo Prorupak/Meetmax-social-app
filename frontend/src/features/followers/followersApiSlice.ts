@@ -26,5 +26,8 @@ const followersApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useFollowUserMutation, useUnfollowUserMutation, useSuggestedUsersQuery } =
-  followersApiSlice;
+export const {
+  useFollowUserMutation,
+  useUnfollowUserMutation,
+  useSuggestedUsersQuery,
+} = followersApiSlice;

@@ -1,5 +1,10 @@
 import { apiSlice } from "@/app/api/apiSlice";
-import { ILoginResponse, IRegister, IRegisterResponse, ICheckSession } from "@/types/types";
+import {
+  ILoginResponse,
+  IRegister,
+  IRegisterResponse,
+  ICheckSession,
+} from "@/types/types";
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -58,7 +63,10 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body,
       }),
     }),
-    resetPassword: builder.mutation<null, { user_id: string; token: string; password: string }>({
+    resetPassword: builder.mutation<
+      null,
+      { user_id: string; token: string; password: string }
+    >({
       query: (body) => ({
         url: "/auth/account/reset-password",
         method: "POST",

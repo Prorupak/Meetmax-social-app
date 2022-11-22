@@ -26,7 +26,9 @@ const StyledLogo = styled.svg`
   }
 `;
 
-const Logo: React.FC<{ className: string; logo?: boolean }> = ({ className }) => {
+const Logo: React.FC<{ className: string; logo?: boolean }> = ({
+  className,
+}) => {
   return (
     <div className="flex items-center space-x-2">
       <StyledLogo
@@ -64,7 +66,9 @@ const Logo: React.FC<{ className: string; logo?: boolean }> = ({ className }) =>
           </g>
         </g>
       </StyledLogo>
-      <h2 className="font-semibold tracking-wider  text-primary-300 dark:text-white">Meetmax</h2>
+      <h2 className="font-semibold tracking-wider  text-primary-300 dark:text-white">
+        Meetmax
+      </h2>
     </div>
   );
 };

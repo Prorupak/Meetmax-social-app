@@ -1,5 +1,12 @@
 import { apiSlice } from "@/app/api/apiSlice";
-import { IProfile, IFetchParams, IPost, IAPIParams, IBookmark, IFollowers } from "@/types/types";
+import {
+  IProfile,
+  IFetchParams,
+  IPost,
+  IAPIParams,
+  IBookmark,
+  IFollowers,
+} from "@/types/types";
 
 export const profileApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -10,9 +17,14 @@ export const profileApiSlice = apiSlice.injectEndpoints({
       }),
       transformResponse: (response: { data: IProfile }) => response.data,
       providesTags: (result, error, username) =>
-        result ? [{ type: "Profile", username }] : [{ type: "Profile", username }],
+        result
+          ? [{ type: "Profile", username }]
+          : [{ type: "Profile", username }],
     }),
-    fetchPostByUsername: builder.query<IPost[], { username: string; params?: IAPIParams }>({
+    fetchPostByUsername: builder.query<
+      IPost[],
+      { username: string; params?: IAPIParams }
+    >({
       query: ({ username, params }) => ({
         url: `/${username}/post`,
         method: "GET",
@@ -20,7 +32,9 @@ export const profileApiSlice = apiSlice.injectEndpoints({
       }),
       transformResponse: (response: { data: IPost[] }) => response.data,
       providesTags: (result, error, { username }) =>
-        result ? [{ type: "Profile", username }] : [{ type: "Profile", username }],
+        result
+          ? [{ type: "Profile", username }]
+          : [{ type: "Profile", username }],
     }),
     fetchUserFollowers: builder.query<IFollowers[], string>({
       query: (username) => `followers/${username}`,
@@ -40,7 +54,10 @@ export const profileApiSlice = apiSlice.injectEndpoints({
       transformResponse: (response: { data: IFollowers[] }) => response.data,
       providesTags: ["Followers"],
     }),
-    fetchBookmarks: builder.query<IBookmark[], { username: string; params?: IFetchParams }>({
+    fetchBookmarks: builder.query<
+      IBookmark[],
+      { username: string; params?: IFetchParams }
+    >({
       query: ({ username, params }) => ({
         url: `/${username}/bookmarks`,
         method: "GET",

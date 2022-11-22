@@ -2,13 +2,18 @@ import { RootState } from "@/app/store/store";
 import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 import React, { Fragment, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { ComputerDesktopIcon, MoonIcon, SunIcon } from "@heroicons/react/24/outline";
+import {
+  ComputerDesktopIcon,
+  MoonIcon,
+  SunIcon,
+} from "@heroicons/react/24/outline";
 import { Menu, Transition } from "@headlessui/react";
 import { setTheme } from "@/features/preference/preferenceSlice";
 
 const ThemeToggler = () => {
   //* get current theme of system and return boolean if dark or not
-  const selectCurrentTheme = () => window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const selectCurrentTheme = () =>
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [currentTheme, setCurrentTheme] = React.useState(selectCurrentTheme());
   const mqListenter = (e: MediaQueryListEvent) => setCurrentTheme(e.matches);
   React.useMemo(() => {

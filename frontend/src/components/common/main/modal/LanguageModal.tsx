@@ -44,7 +44,9 @@ const LanguageModal = () => {
     i18n.changeLanguage(lang);
   };
 
-  const [currentLang, setCurrentLang] = React.useState<string>(i18n.language || "en");
+  const [currentLang, setCurrentLang] = React.useState<string>(
+    i18n.language || "en",
+  );
 
   const handleSelectLanguage = React.useCallback((lang: string) => {
     setCurrentLang(lang);
@@ -144,10 +146,18 @@ const LanguageModal = () => {
                   <hr className={`my-2 border-gray-400 dark:border-gray-700`} />
 
                   <div className="mt-3 flex space-x-3">
-                    <Button buttonType="primary" size="medium" type="submit" onClick={handleSubmit}>
+                    <Button
+                      buttonType="primary"
+                      size="medium"
+                      type="submit"
+                      onClick={handleSubmit}>
                       {t("modal:changeLanguage")}
                     </Button>
-                    <Button buttonType="ghost" size="medium" type="button" onClick={defaultHandler}>
+                    <Button
+                      buttonType="ghost"
+                      size="medium"
+                      type="button"
+                      onClick={defaultHandler}>
                       {t("common:default")}
                     </Button>
                   </div>
