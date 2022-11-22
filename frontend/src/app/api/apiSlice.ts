@@ -16,7 +16,15 @@ export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: baseQuery,
 
-  tagTypes: ["User", "Auth", "Feed", "Notifications", "Followers", "SuggestedUser", "Profile"],
+  tagTypes: [
+    "User",
+    "Auth",
+    "Feed",
+    "Notifications",
+    "Followers",
+    "SuggestedUser",
+    "Profile",
+  ],
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   endpoints: (builder: any) => ({}),
 });

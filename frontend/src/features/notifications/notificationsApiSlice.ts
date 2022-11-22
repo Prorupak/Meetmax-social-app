@@ -3,7 +3,10 @@ import { INotificationsResponse } from "@/types/types";
 
 const notificationApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getNotifications: builder.mutation<INotificationsResponse, { params: { offset?: number } }>({
+    getNotifications: builder.mutation<
+      INotificationsResponse,
+      { params: { offset?: number } }
+    >({
       query: ({ params: { offset } }) => ({
         url: "/notifications",
         method: "GET",
@@ -11,7 +14,8 @@ const notificationApiSlice = apiSlice.injectEndpoints({
           offset,
         },
       }),
-      transformResponse: (response: { data: INotificationsResponse }) => response.data,
+      transformResponse: (response: { data: INotificationsResponse }) =>
+        response.data,
       invalidatesTags: ["Notifications"],
     }),
     getUnreadNotifications: builder.mutation<{ count: number }, void>({
@@ -20,7 +24,8 @@ const notificationApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
 
-      transformResponse: (response: { data: { count: number } }) => response.data,
+      transformResponse: (response: { data: { count: number } }) =>
+        response.data,
 
       invalidatesTags: ["Notifications"],
     }),
