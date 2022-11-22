@@ -1,0 +1,18 @@
+{
+  "default": "デフォルト",
+  "dark": "ダーク",
+  "light": "ライト",
+  "switchTheme": "テーマを切り替える",
+  "system": "システム",
+  "language": "言語",
+  "username": "ユーザー名",
+  "password": "パスワード",
+  "email": "Eメール",
+  "oops": "おっとっと!",
+  "cancel": "キャンセル",
+  "submit": "送信",
+  "delete": "削除",
+  "search": "検索",
+  "save": "保存",
+  "preloaderQuotes": "社交の仕方ではなく、社交の仕方に焦点を当てます。"
+}

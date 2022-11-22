@@ -1,0 +1,22 @@
+{
+  "default": "Por defecto",
+  "dark": "Oscuro",
+  "light": "Claro",
+  "system": "Sistema",
+  "switchTheme": "cambiar de tema",
+  "language": "idioma",
+  "somethingWentWrong": "Algo salió mal",
+  "seemLost": " parecías perdido.",
+  "goToNewsFeed": "Ir a la sección de noticias",
+  "pageNotFound": "La página que intentas visitar no existe.",
+  "uh-oh": "¡Uh oh!",
+  "delete": "Eliminar",
+  "cancel": "Cancelar",
+  "save": "Guardar",
+  "edit": "Editar",
+  "username": "Nombre de usuario",
+  "password": "Contraseña",
+  "email": "Correo electrónico",
+  "oops": "¡Ups!",
+  "preloaderQuotes": "Concéntrese en cómo ser social, no en cómo hacer social."
+}
