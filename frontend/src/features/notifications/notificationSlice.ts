@@ -20,7 +20,7 @@ const notificationSlice = createSlice({
     notificationCount(state, action) {
       // increment the count by 1 of the notification that matches the id
       const notification = state.notifications.find(
-        (notification) => notification.id === action.payload.id,
+        notification => notification.id === action.payload.id,
       );
       console.log("notificationCheck", notification);
     },

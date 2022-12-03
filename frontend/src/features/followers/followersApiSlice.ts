@@ -2,7 +2,7 @@ import { IFollowers } from "@/types/types";
 import { apiSlice } from "@/app/api/apiSlice";
 
 const followersApiSlice = apiSlice.injectEndpoints({
-  endpoints: (build) => ({
+  endpoints: build => ({
     followUser: build.mutation<IFollowers, { follow_id: string }>({
       query: ({ follow_id }) => ({
         url: `follow/${follow_id}`,

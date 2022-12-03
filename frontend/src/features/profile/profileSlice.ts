@@ -68,7 +68,7 @@ const profileSlice = createSlice({
     ) => {
       return {
         ...state,
-        posts: state.posts.map((post) => {
+        posts: state.posts.map(post => {
           if (post.id === action.payload.postID) {
             return {
               ...post,
@@ -95,7 +95,7 @@ const profileSlice = createSlice({
     deletePostFromProfile: (state, action: PayloadAction<string>) => {
       return {
         ...state,
-        posts: state.posts.filter((post) => {
+        posts: state.posts.filter(post => {
           if (post.id !== action.payload) {
             return post;
           }
@@ -105,7 +105,7 @@ const profileSlice = createSlice({
     updatePostFromProfile: (state, action: PayloadAction<IPost>) => {
       return {
         ...state,
-        posts: state.posts.map((post) => {
+        posts: state.posts.map(post => {
           if (post.id === action.payload.id) {
             return {
               ...post,

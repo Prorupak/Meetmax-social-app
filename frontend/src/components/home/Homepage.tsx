@@ -1,3 +1,4 @@
+import { usePageTitle } from "@/hooks";
 import React from "react";
 
 const Homepage = () => {

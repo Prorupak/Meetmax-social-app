@@ -9,9 +9,9 @@
   "alreadyHaveAccount": "Already have an account?",
   "pleaseSignInToContinue": "Please sign in to continue.",
   "signUp": "sign up",
-  "usernameRequired": "Username is required",
-  "passwordRequired": "Password is required",
-  "email": "Email is required",
+  "usernameRequired": "Username or Email is required.",
+  "passwordRequired": "Password is required.",
+  "email": "Email is required.",
   "loginError": "A problem occurred while logging in. Check your username and password or create an account.",
   "firstNameRequired": "First name is required",
   "lastNameRequired": "Last name is required",
@@ -29,5 +29,6 @@
   "gettingStarted": "Getting Started",
   "subHeading": "Create an account to continue and connect with your friends.",
   "firstName": "First Name",
-  "lastName": "Last Name"
+  "lastName": "Last Name",
+  "simpleLoginError": "No accounts were found associated with that email or username. Please try again or create a new account."
 }

@@ -7,10 +7,10 @@ const ThemeToggler = lazy(() => import("../preferences/ThemeToggler"));
 const LoginNavbar: React.FC = () => {
   return (
     <>
-      <div className="sticky top-0 h-16 bg-white dark:bg-gray-800">
+      <div className="sticky top-0 z-50 h-16 bg-white dark:bg-gray-800/90">
         <div className="flex items-center justify-between px-5  py-3 tablet:px-8 laptop:px-12">
           <div className="flex items-center space-x-2">
-            <Logo className="h-8 w-8   laptop:h-10 laptop:w-10" />
+            <Logo className="h-8 w-8   laptop:h-10 laptop:w-10" logo />
           </div>
           <ul className="flex h-[37px] items-center space-x-5">
             <li className="rounded-lg  shadow-sm outline-none dark:border-gray-700">

@@ -10,7 +10,7 @@ const router = Router({ mergeParams: true });
 const { editUser, getUserByUsername, uploadPhoto } = userController;
 const { isAuthenticated } = Middlewares;
 
-router.route("/user/:username").get(isAuthenticated, getUserByUsername);
+router.route("/user/:username").get(getUserByUsername);
 
 router.route("/user/:username/edit").patch(isAuthenticated, editUser);
 

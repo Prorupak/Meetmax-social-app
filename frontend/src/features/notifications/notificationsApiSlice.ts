@@ -2,7 +2,7 @@ import { apiSlice } from "@/app/api/apiSlice";
 import { INotificationsResponse } from "@/types/types";
 
 const notificationApiSlice = apiSlice.injectEndpoints({
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     getNotifications: builder.mutation<
       INotificationsResponse,
       { params: { offset?: number } }

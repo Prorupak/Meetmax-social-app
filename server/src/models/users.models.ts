@@ -40,7 +40,7 @@ export interface IUser extends Document {
 
   toUserJSON(): IUser;
   toProfileJSON(): IUser;
-  passwordMatch(password: string): Promise<boolean>;
+  passwordMatch(pw: string, callback: (error: any, match: any) => void): void;
   isBookmarked(id: string): boolean;
   generateVerificationKey(): string;
 }
@@ -181,10 +181,15 @@ userSchema.virtual("fullName").get(function (this: IUser) {
   return firstName && lastName ? `${firstName} ${lastName}` : null;
 });
 
-userSchema.methods.passwordMatch = function (this: IUser, password) {
+userSchema.methods.passwordMatch = function (this: IUser, password, cb) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
   const user = this;
-  return bcrypt.compare(password, user.password);
+
+  bcrypt.compare(password, user.password, function (err: any, isMatch: any) {
+    if (err) return cb(err);
+
+    cb(null, isMatch);
+  });
 };
 
 userSchema.methods.toUserJSON = function () {

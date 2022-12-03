@@ -1,11 +1,18 @@
 export interface CustomError {
   data: {
     status_code: number;
-    error: {
-      message: string;
-      title: string;
-    };
+    success: boolean;
+    data: null;
+    error: Error;
+    timestamp: number;
   };
+}
+
+export interface Error {
+  type: string;
+  title: string;
+  message: string;
+  errors: null;
 }
 
 export interface ILoginResponse {
@@ -260,4 +267,21 @@ export interface IPreferenceState {
   hasSentVerificationMail: boolean;
   sendVerificationMailError: any;
   isOpenVerificationMessage: boolean;
+}
+
+export interface IRoutes {
+  path: string;
+  title: string;
+  type: "protected" | "public" | "redirect";
+  layout?: string;
+  parent?: string;
+  hidden?: boolean;
+  component: React.FC;
+  menu: IRouteMenu;
+  isStandalone?: boolean;
+}
+
+interface IRouteMenu {
+  mobile?: boolean;
+  advanced?: boolean;
 }

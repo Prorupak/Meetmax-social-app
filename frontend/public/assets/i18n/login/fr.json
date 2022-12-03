@@ -27,5 +27,6 @@
   "subHeading": "Créez un compte pour continuer et vous connecter avec vos amis.",
   "gettingStarted": "Commencer",
   "firstName": "Prénom",
-  "lastName": "Nom de famille"
+  "lastName": "Nom de famille",
+  "simpleLoginError": "Aucun compte n'a été trouvé associé à cet e-mail ou à ce nom d'utilisateur. Veuillez réessayer ou créer un nouveau compte."
 }

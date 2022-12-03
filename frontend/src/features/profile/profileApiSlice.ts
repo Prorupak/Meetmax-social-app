@@ -9,9 +9,9 @@ import {
 } from "@/types/types";
 
 export const profileApiSlice = apiSlice.injectEndpoints({
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     fetchProfile: builder.query<IProfile, string>({
-      query: (username) => ({
+      query: username => ({
         url: `/user/${username}`,
         method: "GET",
       }),
@@ -37,7 +37,7 @@ export const profileApiSlice = apiSlice.injectEndpoints({
           : [{ type: "Profile", username }],
     }),
     fetchUserFollowers: builder.query<IFollowers[], string>({
-      query: (username) => `followers/${username}`,
+      query: username => `followers/${username}`,
       transformResponse: (response: { data: IFollowers[] }) => response.data,
       providesTags: ["Followers"],
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
@@ -50,7 +50,7 @@ export const profileApiSlice = apiSlice.injectEndpoints({
       },
     }),
     fetchUserFollowing: builder.query<IFollowers[], string>({
-      query: (username) => `following/${username}`,
+      query: username => `following/${username}`,
       transformResponse: (response: { data: IFollowers[] }) => response.data,
       providesTags: ["Followers"],
     }),

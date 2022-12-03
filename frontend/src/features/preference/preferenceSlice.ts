@@ -2,7 +2,7 @@ import { IComment, IPost, IPreferenceState } from "@/types/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: IPreferenceState = {
-  theme: "light",
+  theme: "dark",
   language: "en",
   targetComment: null,
   targetPost: null,
@@ -36,7 +36,7 @@ export const preferenceSlice = createSlice({
     setIsOpenVerificationMessage: (state, action: PayloadAction<boolean>) => {
       state.isOpenVerificationMessage = action.payload;
     },
-    closeVerificationMessage: (state) => {
+    closeVerificationMessage: state => {
       state.isOpenVerificationMessage = false;
     },
   },

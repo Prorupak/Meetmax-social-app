@@ -33,5 +33,6 @@
   "addAPost": "投稿を追加",
   "whatsOnYourMind": "何を考えているの？",
   "firstName": "名",
-  "lastName": "姓"
+  "lastName": "姓",
+  "simpleLoginError": "その電子メールまたはユーザー名に関連付けられているアカウントは見つかりませんでした。 もう一度やり直すか、新しいアカウントを作成してください。"
 }

@@ -5,7 +5,7 @@
   "switchTheme": "テーマを切り替える",
   "system": "システム",
   "language": "言語",
-  "username": "ユーザー名",
+  "usernameOrEmail": "ユーザー名またはメールアドレス",
   "password": "パスワード",
   "email": "Eメール",
   "oops": "おっとっと!",
@@ -14,5 +14,6 @@
   "delete": "削除",
   "search": "検索",
   "save": "保存",
-  "preloaderQuotes": "社交の仕方ではなく、社交の仕方に焦点を当てます。"
+  "preloaderQuotes": "社交の仕方ではなく、社交の仕方に焦点を当てます。",
+  "welcomeBack": "ようこそ"
 }

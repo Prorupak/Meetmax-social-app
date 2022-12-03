@@ -1,8 +1,8 @@
 {
-  "username": "Nom d'utilisateur",
   "email": "Email",
   "oops": "Oups!",
   "cancel": "Annuler",
+  "usernameOrEmail": "Nom d'utilisateur ou email",
   "done": "Terminé",
   "loading": "Chargement...",
   "seemLost": "Tu semblais perdu.",
@@ -17,5 +17,6 @@
   "light": "clair",
   "system": "système",
   "default": "défaut",
-  "preloaderQuotes": "Concentrez-vous sur la façon d'être social, pas sur la façon de faire social."
+  "preloaderQuotes": "L'un des meilleurs moyens d'influencer les gens est de les faire se sentir importants.",
+  "welcomeBack": "Bienvenue de retour"
 }
