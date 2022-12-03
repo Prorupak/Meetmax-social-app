@@ -12,6 +12,7 @@ import {
   accountVerifyToken,
   passwordReset,
   recoverAccount,
+  emailLogin,
 } from "@/controllers/auth.controllers";
 
 const { isAuthenticated } = Middlewares;
@@ -21,6 +22,8 @@ const router = Router({ mergeParams: true });
 router.route("/register").post(register, validateBody(schemas.registerSchema));
 
 router.post("/login", validateBody(schemas.loginSchema), login);
+
+router.post("/sign-in", emailLogin);
 
 router.get("/check-session", checkSession);
 

@@ -1,12 +1,8 @@
 import { RootState } from "@/app/store/store";
-import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import React, { Fragment, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  ComputerDesktopIcon,
-  MoonIcon,
-  SunIcon,
-} from "@heroicons/react/24/outline";
+import { BsLaptop, BsMoonStars, BsSun } from "react-icons/bs";
 import { Menu, Transition } from "@headlessui/react";
 import { setTheme } from "@/features/preference/preferenceSlice";
 
@@ -31,17 +27,17 @@ const ThemeToggler = () => {
     {
       name: t("common:dark"),
       key: "dark",
-      icon: MoonIcon,
+      icon: BsMoonStars,
     },
     {
       name: t("common:light"),
       key: "light",
-      icon: SunIcon,
+      icon: BsSun,
     },
     {
       name: t("common:system"),
       key: "system",
-      icon: ComputerDesktopIcon,
+      icon: BsLaptop,
     },
   ];
 
@@ -101,8 +97,8 @@ const ThemeToggler = () => {
           <>
             <Menu.Button
               type="button"
-              className=" cursor-pointer rounded-lg border border-gray-400 px-2 py-1 shadow-sm outline-none hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-700">
-              <selectedTheme.icon className="h-6 w-6 text-primary-200" />
+              className="cursor-pointer p-2 outline-none ">
+              <selectedTheme.icon className="text-base  text-blue-500" />
             </Menu.Button>
             <Transition
               as={Fragment}
@@ -115,16 +111,16 @@ const ThemeToggler = () => {
               <Menu.Items className="absolute -left-[5rem]  z-10  mt-4 w-28 transform  rounded-lg bg-white px-1 shadow-md dark:bg-dark-200 tablet:-left-[9rem] tablet:-translate-x-10 tablet:px-1 laptop:left-0 laptop:max-w-3xl">
                 <div className="w-full overflow-hidden rounded-lg">
                   <div className="relative  gap-8 ">
-                    {themes.map((item) => (
+                    {themes.map(item => (
                       <Menu.Item key={item.key}>
                         {() => (
                           <button
                             type="button"
                             className=" flex w-full items-center   space-x-2 rounded-md bg-transparent p-2 text-left hover:bg-gray-100 dark:hover:bg-dark-100"
                             onClick={() => handleThemeChange(item.key)}>
-                            <item.icon className="h-6 w-6 text-gray-800 dark:text-white tablet:h-6 tablet:w-6" />
+                            <item.icon className="text-base text-gray-800 dark:text-white" />
 
-                            <p className="font-hindMadurai font-medium capitalize text-gray-900 dark:text-white">
+                            <p className=" text-sm  capitalize text-gray-900 dark:text-white">
                               {item.name}
                             </p>
                           </button>

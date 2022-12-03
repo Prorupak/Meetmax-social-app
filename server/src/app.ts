@@ -18,11 +18,13 @@ import initPassport from "@/config/passport";
 import { logger, stream } from "@utils/logger";
 import initSocket from "@/config/socket";
 import sendGridMail from "@sendgrid/mail";
+import { findPublicFolder } from "@/utils/findPublicFolder";
 
 const { errorMiddleware } = ErrorMiddleware;
 
 colors.enable();
 
+const publicFolder = findPublicFolder();
 class Express {
   public app: express.Application;
   public server: Server;
@@ -45,6 +47,12 @@ class Express {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cors(configs.cors));
+    this.app.use(function (req, res, next) {
+      res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+      res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+      next();
+    });
     this.app.use(cookieParser());
     this.app.set("trust proxy", 1);
     this.app.use(compression());

@@ -1,6 +1,6 @@
 {
   "default": "default",
-  "username": "username",
+  "usernameOrEmail": "Username or Email",
   "password": "password",
   "oops": "Oops!",
   "somethingWentWrong": "Something went wrong",
@@ -11,5 +11,6 @@
   "light": "light",
   "system": "System",
   "switchTheme": "Switch theme",
-  "preloaderQuotes": "Focus on how to be social, not on how to do social."
+  "preloaderQuotes": "One of the best ways to influence people is to make them feel important.",
+  "welcomeBack": "Welcome back"
 }

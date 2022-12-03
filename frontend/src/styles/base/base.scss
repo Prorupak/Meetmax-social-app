@@ -15,7 +15,11 @@
   li,
   span,
   button {
-    @apply text-gray-900  dark:text-white;
+    @apply  text-gray-900  dark:text-white;
+  }
+
+  label{
+    @apply tracking-wide text-lg;
   }
 
   h1,
@@ -88,12 +92,13 @@ button {
 
 body {
   margin: 0;
-  font-family: 'SF Pro Display', sans-serif;
+  font-family: 'Clear Sans', sans-serif;
+  font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
   line-height: 1.6;
-  @apply bg-white dark:bg-gray-900;
+  @apply bg-[#f7f7f7] dark:bg-gray-900;
 
 }
 

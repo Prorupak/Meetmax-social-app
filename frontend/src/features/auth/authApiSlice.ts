@@ -1,15 +1,19 @@
+import { useRef } from "react";
 import { apiSlice } from "@/app/api/apiSlice";
 import {
   ILoginResponse,
-  IRegister,
   IRegisterResponse,
   ICheckSession,
 } from "@/types/types";
+import { setCredentials } from "./authSlice";
 
 export const authApiSlice = apiSlice.injectEndpoints({
-  endpoints: (builder) => ({
-    login: builder.mutation<ILoginResponse, IRegister>({
-      query: (body) => ({
+  endpoints: builder => ({
+    login: builder.mutation<
+      ILoginResponse,
+      { username: string; password: string }
+    >({
+      query: body => ({
         url: "/auth/login",
         method: "POST",
         body,
@@ -19,9 +23,28 @@ export const authApiSlice = apiSlice.injectEndpoints({
         return response.data;
       },
       invalidatesTags: ["Auth"],
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          console.log(data);
+          const { user } = data;
+          dispatch(setCredentials(user));
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    }),
+    emailLogin: builder.mutation<{ redirect: string }, { username: string }>({
+      query: ({ username }) => ({
+        url: "/auth/sign-in",
+        method: "POST",
+        body: { username },
+      }),
+      transformResponse: (response: { data: { redirect: string } }) =>
+        response.data,
     }),
     register: builder.mutation<IRegisterResponse, string>({
-      query: (body) => ({
+      query: body => ({
         url: "/auth/register",
         method: "POST",
         body,
@@ -29,7 +52,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
       transformResponse: (response: { data: IRegisterResponse }) => {
         return response.data;
       },
-      transformErrorResponse: (response) => {
+      transformErrorResponse: response => {
         console.log("response", response);
         return response;
       },
@@ -42,7 +65,28 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body,
       }),
     }),
-    checkSession: builder.mutation<ICheckSession, void>({
+    checkSession: builder.query<ICheckSession, void>({
+      query: () => ({
+        url: "/auth/check-session",
+        method: "GET",
+      }),
+      transformResponse: (response: { data: ICheckSession }) => {
+        return response.data;
+      },
+      providesTags: ["Auth"],
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          console.log(data);
+          const { user } = data;
+          dispatch(setCredentials(user));
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    }),
+
+    checkSessionMut: builder.mutation<ICheckSession, void>({
       query: () => ({
         url: "/auth/check-session",
         method: "GET",
@@ -51,11 +95,18 @@ export const authApiSlice = apiSlice.injectEndpoints({
         return response.data;
       },
       invalidatesTags: ["Auth"],
-      transformErrorResponse: (response) => {
-        console.log("response", response);
-        return response;
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          console.log(data);
+          const { user } = data;
+          dispatch(setCredentials(user));
+        } catch (err) {
+          console.log(err);
+        }
       },
     }),
+
     recoverAccount: builder.mutation<null, string>({
       query: (body: string) => ({
         url: "/auth/account/recover",
@@ -67,7 +118,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
       null,
       { user_id: string; token: string; password: string }
     >({
-      query: (body) => ({
+      query: body => ({
         url: "/auth/account/reset-password",
         method: "POST",
         body,
@@ -86,6 +137,12 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    googleOAuth: builder.mutation<{ data: any }, string>({
+      query: url => ({
+        url: url,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -93,9 +150,12 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useLogoutMutation,
-  useCheckSessionMutation,
+  useCheckSessionQuery,
   useAccountVerificationMutation,
   useAccountVerificationTokenQuery,
   useRecoverAccountMutation,
   useResetPasswordMutation,
+  useGoogleOAuthMutation,
+  useCheckSessionMutMutation,
+  useEmailLoginMutation,
 } = authApiSlice;

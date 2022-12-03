@@ -17,7 +17,8 @@ i18n
       loadPath: "/public/assets/i18n/{{ns}}/{{lng}}.json",
     },
     fallbackLng,
-    debug: !isProduction,
+
+    debug: false,
     // can have multiple namespace, in case you want to divide a huge translation into smaller pieces and load them on demand
     ns: ["login", "common", "modal", "posts", "profile", "notifications"],
     interpolation: {
@@ -25,7 +26,7 @@ i18n
       formatSeparator: ",",
     },
     react: {
-      useSuspense: true,
+      useSuspense: false,
     },
     saveMissing: !isProduction,
   });

@@ -22,7 +22,7 @@ const configs = {
     },
   },
   cors: {
-    origin: ["http://localhost:3000", "http://localhost:4173/"],
+    origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:4173/", "http://192.168.1.176:3000"],
     credentials: true,
     preflightContinue: true,
   },

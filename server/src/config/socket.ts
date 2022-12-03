@@ -13,6 +13,7 @@ const socket = (app: Application, server: Server) => {
     cors: {
       origin: config.cors.origin,
       methods: ["GET", "POST"],
+      credentials: true,
     },
   });
 

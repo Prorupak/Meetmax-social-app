@@ -46,7 +46,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
     }
 
     if (!user) {
-      return next(new ErrorHandler(400, info.message));
+      next(new ErrorHandler(401, info.message));
     } else {
       req.logIn(user, function (err) {
         // <-- Log user in
@@ -59,6 +59,37 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
       });
     }
   })(req, res, next);
+};
+
+export const emailLogin = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { username } = req.body;
+    if (!username) {
+      throw new ErrorHandler(400, "Username or Email is required.");
+    }
+    const obj: Record<string, string> = {};
+    if (username.includes("@")) {
+      obj.email = username;
+    } else {
+      obj.username = username;
+    }
+    const user = await User.findOne(obj);
+    if (!user) {
+      return next(
+        new ErrorHandler(
+          401,
+          `No account were found associated with that email or username. Please try again or create a new account.`,
+        ),
+      );
+    }
+    res.status(200).send(
+      makeResponseJson({
+        redirect: `?auth_details=${username}`,
+      }),
+    );
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const checkSession = (req: Request, res: Response, next: NextFunction) => {
@@ -149,16 +180,12 @@ export const accountVerifyToken = async (req: Request, res: Response, next: Next
 
 export const recoverAccount = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { username } = req.body;
+    const { email } = req.body;
     const obj: Record<string, string> = {};
 
-    if (username.includes("@")) {
-      obj.email = username;
-    } else {
-      obj.username = username;
-    }
+    const user = await User.findOne({ email });
 
-    const user = await User.findOne(obj);
+    console.log(user);
 
     if (user) {
       await Token.deleteMany({ _user_id: user._id });
@@ -178,9 +205,8 @@ export const recoverAccount = async (req: Request, res: Response, next: NextFunc
         user_id: user._id,
         name: user.firstName,
       });
+      res.send(makeResponseJson({ success: true }));
     }
-
-    res.send(makeResponseJson({ success: true }));
   } catch (error: any) {
     next(error);
   }

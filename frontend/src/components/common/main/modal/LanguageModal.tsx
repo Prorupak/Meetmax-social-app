@@ -1,9 +1,9 @@
 import { Button } from "@/components/common";
-import useModal from "@/hooks/useModal";
+import { useModal } from "@/hooks";
 import { Dialog, Transition } from "@headlessui/react";
-import { LanguageIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
+import { BsGlobe, BsX } from "react-icons/bs";
 
 const languageList = [
   {
@@ -65,11 +65,9 @@ const LanguageModal = () => {
 
   return (
     <>
-      <button
-        className="flex items-center gap-1  rounded-lg border border-gray-400 px-2 py-[0.4rem] hover:bg-gray-100  dark:border-gray-700 dark:hover:bg-gray-700"
-        onClick={openModal}>
-        <span className="text-sm font-semibold uppercase">{i18n.language}</span>
-        <LanguageIcon className="h-5 w-5 text-primary-200" />
+      <button className="flex items-center gap-1 p-1" onClick={openModal}>
+        <span className="text-base font-medium uppercase">{i18n.language}</span>
+        <BsGlobe className="text-base text-gray-500" />
       </button>
 
       <Transition appear show={isOpen} as={Fragment}>
@@ -105,7 +103,7 @@ const LanguageModal = () => {
                     <button
                       onClick={closeModal}
                       className="rounded-full p-1 hover:bg-gray-300 hover:dark:bg-gray-700">
-                      <XMarkIcon
+                      <BsX
                         className={`h-6 w-6 cursor-pointer text-gray-800 dark:text-white`}
                       />
                     </button>
@@ -113,7 +111,7 @@ const LanguageModal = () => {
                   <hr className={`my-2 border-gray-400 dark:border-gray-700`} />
 
                   <div className="my-6 flex w-full flex-wrap items-center justify-center gap-5">
-                    {languageList.map((language) => (
+                    {languageList.map(language => (
                       <div className="relative" key={language.key}>
                         <button
                           onClick={() => {
@@ -151,7 +149,9 @@ const LanguageModal = () => {
                       size="medium"
                       type="submit"
                       onClick={handleSubmit}>
-                      {t("modal:changeLanguage")}
+                      <span className="text-white">
+                        {t("modal:changeLanguage")}
+                      </span>
                     </Button>
                     <Button
                       buttonType="ghost"

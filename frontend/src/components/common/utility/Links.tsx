@@ -15,6 +15,7 @@ interface IProps {
     | any;
   fontSize?: "xs" | "sm" | "base" | "lg" | "xl" | any;
   color?: string;
+  className?: string;
   [props: string]: any;
 }
 
@@ -24,6 +25,7 @@ const Links: React.FC<IProps> = ({
   fontWeight,
   fontSize,
   color,
+  className,
   ...props
 }) => {
   const weights = ["extrabold", "bold", "semibold", "medium", "light", "thin"];
@@ -35,7 +37,9 @@ const Links: React.FC<IProps> = ({
   return (
     <Link
       to={to}
-      className={`${weight} ${size} ${color ? color : "text-blue-600"}`}
+      className={`${weight} ${size} ${
+        color ? color : "text-blue-600"
+      } ${className}`}
       {...props}>
       {children}
     </Link>

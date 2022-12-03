@@ -18,7 +18,7 @@ module.exports = {
       desktop: "1280px",
     },
     fontFamily: {
-      sans: ["SF Pro Display", "sans-serif"],
+      sans: ["Clear Sans", "sans-serif"],
     },
     extend: {
       padding: {
@@ -44,6 +44,19 @@ module.exports = {
           200: "#E5E5E5",
           300: "#F9F9F9",
         },
+        fontSize: {
+          xs: "0.75rem",
+          sm: "0.813rem",
+          base: "1rem",
+          lg: "1.125rem",
+          xl: "1.25rem",
+          "2xl": "1.5rem",
+          "3xl": "1.875rem",
+          "4xl": "2.25rem",
+          "5xl": "3rem",
+          "6xl": "4rem",
+        },
+
         lineClamp: {
           8: "8",
           10: "10",

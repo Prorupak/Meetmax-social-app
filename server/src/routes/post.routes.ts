@@ -12,7 +12,7 @@ router
   .route("/post")
   .post(isAuthenticated, multer.array("photos", 5), validateBody(schemas.createPostSchema), postControllers.createPost);
 
-router.route("/:username/post").get(isAuthenticated, postControllers.getPostByUsername);
+router.route("/:username/post").get(postControllers.getPostByUsername);
 
 router
   .route("/post/:post_id")

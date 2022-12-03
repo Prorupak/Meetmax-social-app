@@ -56,7 +56,6 @@ export default function (passport) {
       },
     ),
   );
-
   passport.use(
     "local-login",
     new LocalStrategy.Strategy(
@@ -67,14 +66,62 @@ export default function (passport) {
       },
       async (req, username, password, done) => {
         try {
-          const user = await User.findOne({ username });
+          const obj: Record<string, string> = {};
+          if (username.includes("@")) {
+            obj.email = username;
+          } else {
+            obj.username = username;
+          }
+
+          const user = await User.findOne(obj);
 
           if (user) {
-            await user.passwordMatch(password);
-            done(null, user);
+            user.passwordMatch(password, function (err, match) {
+              if (err) {
+                return done(err);
+              }
+              if (match) {
+                return done(null, user);
+              } else {
+                return done(null, false, {
+                  message: "There was a problem logging in. Check your username and password or create an account.",
+                });
+              }
+            });
           } else {
-            done(null, false, {
+            return done(null, false, {
               message: "There was a problem logging in. Check your username and password or create an account.",
+            });
+          }
+        } catch (err) {
+          return done(err);
+        }
+      },
+    ),
+  );
+
+  passport.use(
+    "local-email-login",
+    new LocalStrategy.Strategy(
+      {
+        usernameField: "username",
+        passwordField: "password",
+        passReqToCallback: true,
+      },
+      async (req, username, password, done) => {
+        try {
+          const obj: Record<string, string> = {};
+          if (username.includes("@")) {
+            obj.email = username;
+          } else {
+            obj.username = username;
+          }
+
+          const user = await User.findOne(obj);
+
+          if (!user) {
+            return done(null, false, {
+              message: `There was a problem logging in. No account found with ${username}.`,
             });
           }
         } catch (err) {

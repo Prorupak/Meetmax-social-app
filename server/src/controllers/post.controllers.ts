@@ -102,7 +102,7 @@ export const getPostByUsername = async (req: Request, res: Response, next: NextF
     const { sortBy, sortOrder } = req.query;
 
     const user = await User.findOne({ username });
-    const myFollowingDoc = await Follow.find({ user: req.user._id });
+    const myFollowingDoc = await Follow.find({ user: req.user?.id });
     const myFollowing = myFollowingDoc.map(user => user.target);
 
     if (!user) return next(new ErrorHandler(404, "User not found"));

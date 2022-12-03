@@ -1,8 +1,10 @@
 export const LOGIN = "/login";
+export const SIGN_IN = "/sign-in";
 export const REGISTER = "/register";
 export const FORGOT_PASSWORD = "/forgot-password";
 export const PASSWORD_RESET = "/password-reset";
 export const HOME = "/";
+export const PUBLIC_FEEDS = "/public-feed";
 export const POST = "/post/:post_id";
 export const PROFILE = "/user/:username";
 export const PROFILE_INFO = "/user/:username/info";

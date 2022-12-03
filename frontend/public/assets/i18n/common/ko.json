@@ -1,7 +1,7 @@
 {
   "default": "기본",
   "language": "언어",
-  "username": "사용자 이름",
+  "usernameOrEmail": "사용자 이름 또는 이메일",
   "password": "암호",
   "bio": "생물",
   "seemLost": "당신은 길을 잃은 것 같았다.",
@@ -12,5 +12,6 @@
   "light": "빛",
   "systemDefault": "시스템 기본값",
   "oops": "오!",
-  "preloaderQuotes": "어떻게 사교적으로 하느냐가 아니라 어떻게 사교적으로 하느냐에 초점을 맞추십시오."
+  "preloaderQuotes": "사람들에게 영향을 미치는 가장 좋은 방법 중 하나는 그들이 중요하다고 느끼게 만드는 것입니다.",
+  "welcomeBack": "다시 오신 것을 환영합니다!"
 }

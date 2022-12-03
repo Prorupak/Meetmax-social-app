@@ -14,9 +14,10 @@
   "cancel": "Cancelar",
   "save": "Guardar",
   "edit": "Editar",
-  "username": "Nombre de usuario",
+  "usernameOrEmail": "Nombre de usuario o correo electrónico",
   "password": "Contraseña",
   "email": "Correo electrónico",
   "oops": "¡Ups!",
-  "preloaderQuotes": "Concéntrese en cómo ser social, no en cómo hacer social."
+  "preloaderQuotes": "Concéntrese en cómo ser social, no en cómo hacer social.",
+  "welcomeBack": "¡Bienvenido de nuevo!"
 }
