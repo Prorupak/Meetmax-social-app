@@ -1,25 +1,8 @@
-import React, { FC, lazy, ReactNode, Suspense } from "react";
-import { useLocation } from "react-router-dom";
-import {
-  FORGOT_PASSWORD,
-  LOGIN,
-  PASSWORD_RESET,
-  REGISTER,
-  SIGN_IN,
-} from "@/constants/routes";
-// @ts-ignore
-import LazyImage from "react-lazy-blur-image";
-import LoginNavbar from "@/components/common/shared/navbar/LoginNavbar";
+import React, { FC, ReactNode } from "react";
 import StandAloneBanner from "@/components/common/standaloneBanner/StandAloneBanner";
-import {
-  ConditionallyRender,
-  LanguageModal,
-  Logo,
-  ThemeToggler,
-} from "@/components/common";
+import { ConditionallyRender, LanguageModal, Logo } from "@/components/common";
 import { useWindowSize } from "@/hooks";
 import { useTranslation } from "react-i18next";
-import { BsX } from "react-icons/bs";
 
 interface IStandAloneLayout {
   children: ReactNode;
@@ -30,22 +13,24 @@ const StandAloneLayout: FC<IStandAloneLayout> = ({
   children,
   BannerComponent,
 }) => {
-  const { isMobile } = useWindowSize();
-  let banner = <StandAloneBanner title="Meetmax" />;
+  const { isMobile, isTablet } = useWindowSize();
+  const isMobileOrTablet = Boolean(isMobile || isTablet);
+
+  let banner = <StandAloneBanner title="NextGen" />;
   if (BannerComponent) {
     banner = BannerComponent;
   }
   const { t } = useTranslation();
   return (
-    <section className="">
+    <section className="h-screen">
       <div
-        className="relative h-full bg-[#030306] bg-cover bg-center bg-no-repeat"
+        className="relative h-full w-screen bg-[#030306] bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: "url(/assets/bg-1.webp)",
         }}>
         {/* --------------COMPONENTS SECTION--------------------  */}
-        <div className="flex h-full flex-col items-center pt-20 shadow-lg">
-          <div className="flex w-[23rem] max-w-screen-mobile justify-center rounded-lg bg-white dark:bg-gray-800 laptop:w-[60rem] laptop:max-w-screen-laptop">
+        <div className="flex h-full flex-col items-center justify-center  shadow-lg">
+          <div className="flex  max-w-screen-mobile justify-center rounded-lg bg-white dark:bg-gray-800  laptop:max-w-screen-laptop">
             <main className="h-full w-[30rem] space-y-10 p-10">
               <div className="flex items-center justify-between">
                 <Logo className="h-7 w-7" logo />
@@ -55,7 +40,7 @@ const StandAloneLayout: FC<IStandAloneLayout> = ({
             </main>
             {/* -------------------SIDE BANNER------------- */}
             <ConditionallyRender
-              condition={!isMobile}
+              condition={!isMobileOrTablet}
               show={
                 <>
                   <hr className="h-full border border-gray-300 dark:border-gray-700" />
@@ -70,7 +55,7 @@ const StandAloneLayout: FC<IStandAloneLayout> = ({
           <div className="mt-5">
             <div className="flex items-center justify-center py-5">
               <span className="text-sm font-thin text-white">
-                © 2021 Meetmax. All rights reserved.
+                © 2021 NextGen. All rights reserved.
               </span>
 
               <span className="text-sm font-thin text-white">

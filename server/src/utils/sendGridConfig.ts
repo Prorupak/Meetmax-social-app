@@ -174,7 +174,7 @@ const renderEmailTemplate = (content: string) => {
                                                     </tr>
                                                     <tr>
                                                     <td valign="middle" style="text-align:center">
-                                                        <h3 class="companyName" style="margin: 0; padding:0; display:inline-block; font-size: 32px; color: #1a1a1a; font-family: inherit">Meetmax</h3>
+                                                        <h3 class="companyName" style="margin: 0; padding:0; display:inline-block; font-size: 32px; color: #1a1a1a; font-family: inherit">NextGen</h3>
                                                     </td>
                                                     </tr>
                                                     <tr></tr>
@@ -183,7 +183,7 @@ const renderEmailTemplate = (content: string) => {
                                                 ${content}
                                             </table>
                                             <div data-role="module-unsubscribe" class="module" role="module" data-type="unsubscribe" style="color:#444444; font-size:12px; line-height:20px; padding:16px 16px 16px 16px; text-align:Center;">
-                                            <p class="footerText" style="font-size: 12px; color: #1a1a1a; font-family: Poppins, calibri,sans-serif,Helvetica; margin: 2px">Copyright &copy; ${new Date().getFullYear()} Meetmax. All rights reserved</p>
+                                            <p class="footerText" style="font-size: 12px; color: #1a1a1a; font-family: Poppins, calibri,sans-serif,Helvetica; margin: 2px">Copyright &copy; ${new Date().getFullYear()} NextGen. All rights reserved</p>
                             <a class="footerText" style="font-size: 12px; font-family: Poppins, calibri,sans-serif,Helvetica;" href="https://im-rupak.tech">https://im-rupak.tech</a>
                             <span class="footerText">|</span>
                             <a class="footerText" style="font-size: 12px; font-family: Poppins, calibri,sans-serif,Helvetica;" href="https://facebook.com/">Facebook</a>
@@ -225,9 +225,9 @@ export const sendVerificationMail = (params: IMailParams) => {
           to: params.email,
           from: {
             email: "contact@im-rupak.tech",
-            name: "Meetmax",
+            name: "NextGen",
           }, // Use the email address or domain you verified above
-          subject: "Meetmax - Verify your email address",
+          subject: "NextGen - Verify your email address",
           html: renderEmailTemplate(`
                     <table width="100%" bgcolor="#f6f6f6">
                     <tbody>
@@ -338,9 +338,9 @@ export const sendPasswordResetInstructionMail = (params: IMailParamsReset) => {
           to: params.email,
           from: {
             email: "contact@im-rupak.tech",
-            name: "Meetmax",
+            name: "NextGen",
           }, // Use the email address or domain you verified above
-          subject: "Meetmax - Reset your password",
+          subject: "NextGen - Reset your password",
           html: renderEmailTemplate(`
                     <table width="100%" bgcolor="#f6f6f6">
                     <tbody>

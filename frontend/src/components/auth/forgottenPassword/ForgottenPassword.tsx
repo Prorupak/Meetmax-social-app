@@ -31,19 +31,17 @@ const ForgottenPassword = () => {
   });
   const { email } = getValues();
 
-  const [forgottenPassword, { error }] = useRecoverAccountMutation();
-  console.log("error", error);
+  const [forgottenPassword, { error, isLoading }] = useRecoverAccountMutation();
 
   const { t } = useTranslation();
 
-  const onSubmit = handleSubmit(async ({ email }: ISubmitProps) => {
+  const onSubmit = handleSubmit(async (props: ISubmitProps) => {
     try {
-      await forgottenPassword(email);
-      console.log("test");
+      await forgottenPassword(props);
       setAttempted(true);
       setAttemptedEmail(email);
     } catch (e: unknown) {
-      console.log(e);
+      console.log("e", e);
     }
   });
   return (
@@ -81,29 +79,34 @@ const ForgottenPassword = () => {
         <form
           className="mt-6 flex flex-col items-center space-y-4"
           onSubmit={onSubmit}>
-          <div className="w-full">
-            <div className="relative flex items-center">
-              <BsPerson className="absolute z-20 ml-2 h-5 w-5 text-gray-700 dark:text-gray-300" />
+          <div className=" mb-6 w-full">
+            <div className="relative">
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <BsPerson className="h-5 w-5 text-gray-400" />
+              </div>
               <Input
-                className="pl-8 placeholder:text-sm placeholder:text-gray-700"
-                size="large"
                 type="email"
-                {...register("email")}
-                placeholder="Enter your email"
+                name="email"
+                label="email"
+                error={error || errors.email?.message}
+                register={register}
+                required
+                className="p-2.5 pl-10 text-start placeholder:text-sm"
+                readOnly={isLoading}
+                placeholder="Username or Email Address"
               />
             </div>
-            <ConditionallyRender
-              condition={Boolean(errors.email)}
-              show={
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                  <span className="font-medium">{t("common:oops")}</span>{" "}
-                  {t("login:emailRequired")}
-                </p>
-              }
-            />
+            {errors.email && (
+              <p className="mt-2 ml-3 text-sm text-red-600 dark:text-red-500">
+                <span className="font-medium">{t("common:oops")}</span>{" "}
+                {errors?.email?.message ? t("login:emailRequired") : null}
+              </p>
+            )}
           </div>
           <Button
             type="submit"
+            isLoading={isLoading}
+            loadingText="Sending email...."
             buttonType="primary"
             size="medium"
             className="w-[50%]">
@@ -121,11 +124,9 @@ const ForgottenPassword = () => {
               Or login
             </span>
           </div>
-          <Button type="submit" buttonType="primary" size="medium">
-            <Links to={LOGIN} className="text-white">
-              Login
-            </Links>
-          </Button>
+          <div className="flex justify-center">
+            <Links to={LOGIN}>Back to login</Links>
+          </div>
         </div>
       </div>
     </StandAloneLayout>

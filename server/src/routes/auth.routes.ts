@@ -35,7 +35,7 @@ router.get("/account/verify/:token", accountVerifyToken);
 
 router.post("/account/recover", recoverAccount);
 
-router.patch("/account/password/reset", passwordReset);
+router.patch("/account/reset-password", passwordReset);
 
 router.get("/google", passport.authenticate("google-auth", { scope: ["email", "profile"] }));
 

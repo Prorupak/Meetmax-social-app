@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as GoogleSvg } from "@/assets/icon/google.svg";
+import { ReactComponent as GoogleSvg } from "@/assets/icon/Google.svg";
 
 const PasswordForm = () => {
   return (

@@ -5,6 +5,7 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx}",
     "./src/Pages/**/*.{js,ts,jsx,tsx}",
     "./src/App.tsx",
+    "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
   ],
   darkMode: "class",
   prefix: "",
@@ -77,5 +78,6 @@ module.exports = {
     require("@tailwindcss/forms"),
     require("@tailwindcss/typography"),
     require("@headlessui/tailwindcss"),
+    require("flowbite/plugin"),
   ],
 };

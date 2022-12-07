@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import meetmaxLogo from "@/assets/img/meetmax_logo.svg";
+import NextGenLogo from "@/assets/img/NextGen_logo.svg";
 import withTheme from "../../HOC/withTheme";
 import { useTranslation } from "react-i18next";
 
@@ -14,13 +14,14 @@ const Preloader: FC<{ theme: string }> = ({ theme }) => {
       <div
         className={`animate-fade z-50 flex h-full  w-full flex-col items-center justify-center  text-center`}>
         <img
-          src={meetmaxLogo}
-          alt="Meetmax Logo"
+          src={NextGenLogo}
+          alt="NextGen Logo"
           className="w-14 animate-bounce"
         />
-        <h3 className={`${bgText}`}>Meetmax</h3>
+        <h3 className={`${bgText}`}>NextGen</h3>
         <p className={`mt-4 w-[80%] text-sm laptop:w-full ${bgTextQuotes}`}>
-          “{t("common:preloaderQuotes")}“
+          One of the best ways to influence people is to make them feel
+          important.
         </p>
       </div>
     </div>

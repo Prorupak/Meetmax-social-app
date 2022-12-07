@@ -107,11 +107,11 @@ export const authApiSlice = apiSlice.injectEndpoints({
       },
     }),
 
-    recoverAccount: builder.mutation<null, string>({
-      query: (body: string) => ({
+    recoverAccount: builder.mutation<null, { email: string }>({
+      query: ({ email }) => ({
         url: "/auth/account/recover",
         method: "POST",
-        body,
+        body: { email },
       }),
     }),
     resetPassword: builder.mutation<

@@ -9,13 +9,13 @@ console.log(`⚡️: Running in ${env} mode`);
 const configs = {
   PORT: process.env.PORT,
   client: process.env.CLIENT_URL,
-  mongo: process.env.MONGODB_URL1,
+  mongo: process.env.MONGODB_URL,
   NODE_ENV: process.env.NODE_ENV,
   LOG_FORMAT: process.env.LOG_FORMAT,
   LOG_DIR: process.env.LOG_DIR,
   sendGridApiKey: process.env.SENDGRID_API_KEY,
   mongoose: {
-    url: process.env.MongoDB_URL,
+    url: process.env.MONGODB_URL,
     options: {
       useNewUrlParser: true,
       useUnifiedTopology: true,

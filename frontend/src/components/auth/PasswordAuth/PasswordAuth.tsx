@@ -10,17 +10,9 @@ import Schema from "@/validations/authValidations";
 import { useForm } from "react-hook-form";
 import { setCredentials } from "@/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
-import {
-  EyeIcon,
-  EyeSlashIcon,
-  LockClosedIcon,
-  UserIcon,
-} from "@heroicons/react/24/outline";
-import { Button, Input } from "@/components/common";
-import { FORGOT_PASSWORD, REGISTER } from "@/constants/routes";
-import Links from "@/components/common/utility/Links";
-import SocialAuth from "../SocialAuth/SocialAuth";
+import { Button, ConditionallyRender, Input } from "@/components/common";
 import toast from "react-hot-toast";
+import { BsEye, BsEyeSlash, BsLock, BsPerson } from "react-icons/bs";
 
 interface IPasswordAuth {
   redirect: string;
@@ -32,18 +24,15 @@ interface ISubmitProps {
 }
 
 const PasswordAuth: FC<IPasswordAuth> = ({ redirect }) => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [isPasswordVisible, setPasswordVisible] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const [login, { isError, isLoading, error, isSuccess }] = useLoginMutation();
+  const [login, { isError, isLoading, error }] = useLoginMutation();
   const errorMessage = (error as CustomError)?.data;
   const query = useQueryParams();
   const auth_details = query.get("auth_details") as string;
 
-  const toggleViewPasswordOnHold = () => {
-    setShowPassword(prev => !prev);
-  };
   const {
     register,
     setValue,
@@ -74,6 +63,10 @@ const PasswordAuth: FC<IPasswordAuth> = ({ redirect }) => {
       navigate(parseRedirectParams(redirect), { replace: true });
     }
   });
+
+  const togglePasswordVisible = () => {
+    setPasswordVisible(prev => !prev);
+  };
   return (
     <>
       <form className="space-y-4" onSubmit={onSubmit}>
@@ -99,75 +92,68 @@ const PasswordAuth: FC<IPasswordAuth> = ({ redirect }) => {
           </div>
         )}
 
-        <div>
-          <label
-            className="mb-2 block text-sm font-medium capitalize text-gray-900 dark:text-white"
-            htmlFor="username">
-            {t("common:usernameOrEmail")}
-          </label>
-          <div className="relative flex items-center">
-            <UserIcon className="absolute z-20 ml-2 h-5 w-5 text-gray-700 dark:text-gray-300" />
+        <div className="  w-full">
+          <div className="relative">
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <BsPerson className="h-5 w-5 text-gray-400" />
+            </div>
             <Input
-              className="pl-8"
-              size="medium"
               type="text"
-              {...register("username")}
-              placeholder="John_doe, John123 or john_doe123@gmail.com"
+              name="username"
+              label="username"
+              register={register}
+              required
+              className="p-2.5 pl-10 text-start placeholder:text-sm"
+              readOnly={isLoading}
+              placeholder="Username or Email Address"
             />
           </div>
-          {errors.username && (
-            <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-              <span className="font-medium">{t("common:oops")}</span>{" "}
-              {errors?.username?.message ? t("login:usernameRequired") : null}
-            </p>
-          )}
+          <ConditionallyRender
+            condition={Boolean(errors.username)}
+            show={
+              <p className="mt-2 ml-3 text-sm text-red-600 dark:text-red-500">
+                <span className="font-medium">{t("common:oops")}</span>
+                <ConditionallyRender
+                  condition={Boolean(errors.username?.message)}
+                  show={t("login:passwordRequired")}
+                />
+              </p>
+            }
+          />
         </div>
-        <div>
-          <label
-            className="mb-2 block text-sm font-medium capitalize text-gray-900 dark:text-white"
-            htmlFor="password">
-            {t("common:password")}
-          </label>
-          <div className="relative flex items-center">
-            <LockClosedIcon className="absolute z-20 ml-2 h-5 w-5 text-gray-700 dark:text-gray-300" />
+        <div className="  w-full">
+          <div className="relative">
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <BsLock className="h-5 w-5 text-gray-400" />
+            </div>
             <Input
-              className="pl-8"
-              size="medium"
-              autoComplete="false"
-              type={showPassword ? "text" : "text"}
-              {...register("password")}
-              placeholder="••••••••"
+              type={isPasswordVisible ? "text" : "password"}
+              name="password"
+              label="password"
+              register={register}
+              required
+              className="p-2.5 pl-10 text-start placeholder:text-sm"
+              readOnly={isLoading}
+              placeholder="New Password"
             />
-
-            {showPassword ? (
-              <EyeSlashIcon
-                className="absolute right-3 z-20 ml-2 h-5 w-5 cursor-pointer text-gray-700 dark:text-gray-300"
-                onClick={toggleViewPasswordOnHold}
+            <button
+              type="button"
+              className="absolute inset-y-0  right-0  flex cursor-pointer items-center pr-3"
+              onClick={togglePasswordVisible}>
+              <ConditionallyRender
+                condition={isPasswordVisible}
+                show={<BsEye className="h-6 w-6 text-gray-500" />}
+                elseShow={<BsEyeSlash className="h-6 w-6 text-gray-500" />}
               />
-            ) : (
-              <EyeIcon
-                className="absolute right-3 z-20 ml-2 h-5 w-5 cursor-pointer text-gray-700 dark:text-gray-300"
-                onClick={toggleViewPasswordOnHold}
-              />
-            )}
+            </button>
           </div>
-
           {errors.password && (
-            <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+            <p className="mt-2 ml-3 text-sm text-red-600 dark:text-red-500">
               <span className="font-medium">{t("common:oops")}</span>{" "}
               {errors?.password?.message ? t("login:passwordRequired") : null}
             </p>
           )}
         </div>
-        {errorMessage?.status_code === 401 ? (
-          <div className="flex items-center justify-between">
-            <Links
-              className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
-              to={FORGOT_PASSWORD}>
-              {t("login:forgetYourPassword")}
-            </Links>
-          </div>
-        ) : null}
         <div className="flex flex-col items-center gap-3">
           <Button
             buttonType="primary"

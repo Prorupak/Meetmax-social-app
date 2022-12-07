@@ -6,11 +6,11 @@ import {
 } from "@reduxjs/toolkit/query/react";
 import type { BaseQueryFn } from "@reduxjs/toolkit/query";
 
-const meetmaxUrl = import.meta.env.VITE_MEETMAX_URL || "http://localhost:9005";
-const meetmaxApiVersion = import.meta.env.VITE_MEETMAX_API_VERSION || "v1";
+const NextGenUrl = import.meta.env.VITE_NextGen_URL || "http://localhost:9005";
+const NextGenApiVersion = import.meta.env.VITE_NextGen_API_VERSION || "v1";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: `${meetmaxUrl}/api/${meetmaxApiVersion}`,
+  baseUrl: `${NextGenUrl}/api/${NextGenApiVersion}`,
   credentials: "same-origin",
   prepareHeaders: headers => {
     return headers;

@@ -16,17 +16,16 @@ import {
   FORGOT_PASSWORD,
   HOME,
   LOGIN,
+  PASSWORD_RESET,
   PUBLIC_FEEDS,
-  REGISTER,
 } from "@/constants/routes";
 import { Login } from "./auth";
 import PublicFeeds from "./publicFeeds/PublicFeeds";
-import Register from "./auth/register/Register";
 import ForgottenPassword from "./auth/forgottenPassword/ForgottenPassword";
-import SimpleAuth from "./auth/simpleAuth/SimpleAuth";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import PasswordReset from "./auth/PasswordReset/PasswordReset";
 
 const App = () => {
   const user = useAppSelector(({ root }: RootState) => root.auth?.id);
@@ -74,6 +73,7 @@ const App = () => {
                 {/* <Route path={REGISTER} element={<Register />} /> */}
                 <Route path={FORGOT_PASSWORD} element={<ForgottenPassword />} />
                 <Route path={PUBLIC_FEEDS} element={<PublicFeeds />} />
+                <Route path={PASSWORD_RESET} element={<PasswordReset />} />
               </Route>
             </Route>
             {/* -------PROTECTED ROUTES-------- */}

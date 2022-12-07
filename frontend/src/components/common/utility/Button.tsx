@@ -12,6 +12,7 @@ interface IProps {
   children: ReactNode;
   className?: string;
   isLoading?: boolean;
+  loadingText?: string;
   [props: string]: any;
 }
 
@@ -23,6 +24,7 @@ const Button: FC<IProps> = ({
   className,
   widthFull,
   isLoading,
+  loadingText,
   ...props
 }) => {
   const primary =
@@ -71,7 +73,7 @@ const Button: FC<IProps> = ({
                 fill="currentColor"
               />
             </svg>
-            <span className="text-white">Loading...</span>
+            <span className="text-white">{loadingText || "loading...."}</span>
           </>
         ) : (
           children

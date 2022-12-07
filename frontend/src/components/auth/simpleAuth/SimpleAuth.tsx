@@ -2,9 +2,7 @@ import React, { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useEmailLoginMutation } from "@/features/auth/authApiSlice";
 import { useNavigate } from "react-router-dom";
-import { Button, ConditionallyRender, Input, Logo } from "@/components/common";
-import StandAloneLayout from "@/components/layout/standAloneLayout/StandALoneLayout";
-import SocialAuth from "../SocialAuth/SocialAuth";
+import { Button, ConditionallyRender, Input } from "@/components/common";
 import { BsPerson } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -77,30 +75,35 @@ const SimpleAuth: FC<ISimpleAuth> = ({ redirect }) => {
             </div>
           }
         />
-        <div className="w-full">
-          <label
-            className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-            htmlFor="username">
-            {t("common:usernameOrEmail")}
-          </label>
-          <div className="relative flex items-center">
-            <BsPerson className="absolute z-20 ml-2 h-5 w-5 text-gray-700 dark:text-gray-300" />
+        <div className="  w-full">
+          <div className="relative">
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <BsPerson className="h-5 w-5 text-gray-400" />
+            </div>
             <Input
-              className="pl-8"
-              size="medium"
               type="text"
-              {...register("username")}
-              placeholder="John_doe, John123 or john_doe123@gmail.com"
+              name="username"
+              label="username"
+              register={register}
+              required
+              className="p-2.5 pl-10 text-start placeholder:text-sm"
+              readOnly={isLoading}
+              placeholder="Username or Email Address"
             />
           </div>
-          {errors.username && (
-            <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-              <span className="font-medium">{t("common:oops")}</span>{" "}
-              {errors?.username?.message ? t("login:usernameRequired") : null}
-            </p>
-          )}
-        </div>
-
+          <ConditionallyRender
+            condition={Boolean(errors.username)}
+            show={
+              <p className="mt-2 ml-3 text-sm text-red-600 dark:text-red-500">
+                <span className="font-medium">{t("common:oops")}</span>
+                <ConditionallyRender
+                  condition={Boolean(errors.username?.message)}
+                  show={t("login:passwordRequired")}
+                />
+              </p>
+            }
+          />
+        </div>{" "}
         <Button
           type="submit"
           buttonType="primary"

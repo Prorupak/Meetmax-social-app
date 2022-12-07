@@ -8,7 +8,19 @@ export const simpleAuthSchema = yup.object({
   username: yup.string().required("Username or Email is required."),
 });
 export const forgottenPasswordSchema = yup.object({
-  email: yup.string().required("Email is required."),
+  email: yup
+    .string()
+    .required("Email is required.")
+    .matches(
+      /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+      "Invalid email address.",
+    ),
+});
+export const resetPasswordSchema = yup.object({
+  password: yup
+    .string()
+    .required("Password is required.")
+    .min(6, "Password must be at least 6 characters."),
 });
 export const RegSchema = yup.object({
   password: yup

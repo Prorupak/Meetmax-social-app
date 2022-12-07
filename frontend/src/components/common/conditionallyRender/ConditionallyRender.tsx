@@ -38,7 +38,6 @@ const ConditionallyRender = ({
   };
 
   if (condition) {
-    console.log("show", condition);
     if (isFunc(show)) {
       return handleIncomingRenderFunc(show as RenderFunc);
     }
@@ -46,7 +45,6 @@ const ConditionallyRender = ({
   }
   if (!condition && elseShow) {
     if (isFunc(elseShow)) {
-      console.log("elseShow", isFunc(elseShow));
       return handleIncomingRenderFunc(elseShow as RenderFunc);
     }
 

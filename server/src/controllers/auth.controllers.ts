@@ -183,6 +183,8 @@ export const recoverAccount = async (req: Request, res: Response, next: NextFunc
     const { email } = req.body;
     const obj: Record<string, string> = {};
 
+    console.log("email", email);
+
     const user = await User.findOne({ email });
 
     console.log(user);

@@ -1,41 +1,41 @@
-import React, { forwardRef } from "react";
+import React from "react";
+import { Path, UseFormRegister } from "react-hook-form";
 
-interface IProps {
-  type?:
-    | "text"
-    | "password"
-    | "email"
-    | "number"
-    | "tel"
-    | "search"
-    | "file"
-    | "checkbox"
-    | "radio"
-    | "hidden"
-    | undefined;
-  size?: "small" | "medium" | "large";
-  placeholder?: string;
+type InputProps = {
+  label: Path<any>;
+  register: UseFormRegister<any>;
+  required: boolean;
+  size?: "sm" | "md" | "lg";
+  error?: any;
   className?: string;
-  [props: string]: any;
-}
+  [prop: string]: any;
+};
 
-const Input = forwardRef<HTMLInputElement, IProps>(
-  ({ type, size, className, ...props }, ref) => {
-    const small = size === "small" && "px-2 py-1 text-xs";
-    const medium = size === "medium" && "px-3 py-[0.7rem] text-sm";
-    const large = size === "large" && "px-4 py-3 text-base";
-    const searchInput =
-      type === "search" &&
-      "ring-1 dark:ring-gray-500 ring-gray-300 focus-visible:ring-2 focus-visible:ring-blue-500";
-    return (
+const Input = ({
+  label,
+  register,
+  size = "md",
+  required,
+  error,
+  className,
+  ...rest
+}: InputProps) => {
+  return (
+    <div className="flex w-full flex-col justify-start">
       <input
-        ref={ref}
-        className={`${small} ${medium} ${large} ${searchInput}  w-full rounded-md border-none bg-gray-100  px-3 py-2 text-sm outline-none placeholder:text-xs placeholder:font-thin placeholder:leading-loose placeholder:text-gray-500 placeholder:opacity-70 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:placeholder:text-gray-300 ${className}`}
-        type={type || "text"}
-        {...props}
+        {...register(label, { required })}
+        {...rest}
+        className={`block rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 ${className} ${
+          error
+            ? "!focus:border-red-600 !focus:ring-red-500 !border-red-300"
+            : ""
+        }`}
       />
-    );
-  },
-);
+      {/* {error && typeof error === "string" && (
+        <span className="ml-4 mt-1 text-xs text-red-500">{error}</span>
+      )} */}
+    </div>
+  );
+};
 
 export default Input;

@@ -9,7 +9,7 @@ import SocialAuthFailed from "../auth/SocialAuth/SocialAuthFailed";
 export const routes: IRoutes[] = [
   {
     path: HOME,
-    title: "Meetmax",
+    title: "NextGen",
     component: Homepage,
     type: "protected",
     menu: {},

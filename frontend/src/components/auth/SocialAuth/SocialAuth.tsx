@@ -1,6 +1,6 @@
 import React, { MouseEvent } from "react";
 // @ts-ignore
-import { ReactComponent as GoogleSvg } from "@/assets/icon/google.svg";
+import { ReactComponent as GoogleSvg } from "@/assets/icon/Google.svg";
 import { Button } from "@/components/common";
 import { useTranslation } from "react-i18next";
 import { useGoogleOAuthMutation } from "@/features/auth/authApiSlice";
@@ -8,7 +8,7 @@ import { useGoogleOAuthMutation } from "@/features/auth/authApiSlice";
 const SocialAuth = () => {
   const [OAuth, { isLoading }] = useGoogleOAuthMutation();
   const { t } = useTranslation();
-  const apiURL = import.meta.env.VITE_MEETMAX_URL;
+  const apiURL = import.meta.env.VITE_NEXTGEN_URL;
   const onClickSocialLogin = (e: MouseEvent<HTMLAnchorElement>) => {
     if (isLoading) {
       e.preventDefault();

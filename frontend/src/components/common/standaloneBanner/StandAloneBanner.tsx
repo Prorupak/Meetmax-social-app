@@ -70,7 +70,7 @@ const StandAloneBanner: FC<IStandAloneBanner> = ({ children, title }) => {
             </div>
             <Links
               to={PUBLIC_FEEDS}
-              className="my-3 rounded-full bg-blue-400/30 px-3 py-1 text-xs">
+              className="my-3 rounded-full bg-blue-400/30 px-4 py-2 text-[13px]">
               Public Feeds
             </Links>
           </div>

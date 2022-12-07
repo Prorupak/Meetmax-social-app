@@ -1,1 +1,1 @@
-export const DEFAULT_PAGE_TITLE = "Meetmax | Social Network";
+export const DEFAULT_PAGE_TITLE = "NextGen | Social Network";
